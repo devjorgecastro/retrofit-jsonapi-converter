@@ -11,12 +11,12 @@ import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.converter.JsonApiConverterFactory
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.lang.Exception
+import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
+import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         GlobalScope.launch {
-            testApiData2()
+            testApiDataWithError1()
         }
     }
 
@@ -52,6 +52,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private suspend fun testApiDataWithError1(){
+        try {
+            val response = getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getDataWithError1()
+            val cityName = response.first().cityName
+        }
+        catch (e: JsonApiResponseException) {
+            val errorData = e.data
+        }
+        catch (e: Exception) {
+            val error = e
+        }
+    }
+
     private fun getRetrofitInstance(): Retrofit {
 
         val baseUrl = "http://www.mocky.io/"
@@ -75,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 .client(httpClient)
                 .addConverterFactory(JsonApiConverterFactory())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addCallAdapterFactory(JsonApiCallAdapterFactory.create()) /*Add for catch HttpException*/
                 .build()
     }
 }
