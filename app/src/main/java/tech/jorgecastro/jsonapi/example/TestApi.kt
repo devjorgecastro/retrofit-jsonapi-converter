@@ -11,4 +11,7 @@ interface TestApi {
 
     @GET("v2/5e538c4b2e000058002dac0d")
     suspend fun getData2(): Flow<List<ZoneCoverage>>
+
+    @GET("v2/5e797e302d0000ab7b18bd39")
+    suspend fun getDataWithError1(): List<ZoneCoverage>
 }
