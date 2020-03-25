@@ -3,6 +3,7 @@ package tech.jorgecastro.jsonapi.adapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Request
+import okio.Timeout
 import org.json.JSONObject
 import retrofit2.*
 import tech.jorgecastro.jsonapi.JsonApiError
@@ -55,6 +56,10 @@ class JsonApiRetrofiCall<T>(val call: Call<T>): Call<T> {
 
     override fun request(): Request {
         return call.request()
+    }
+
+    override fun timeout(): Timeout {
+        return call.timeout()
     }
 
 }

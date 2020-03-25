@@ -4,6 +4,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -19,7 +20,6 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import kotlin.coroutines.resume
 import kotlin.reflect.KClass
-
 
 
 class JsonApiConverterFactory : Converter.Factory() {
@@ -39,43 +39,15 @@ class JsonApiConverterFactory : Converter.Factory() {
                 }
                 getFlowJsonConverter(type) as Converter<ResponseBody, Class<*>>
             }
+            Single::class.java -> {
+                if (type is ParameterizedType) {
+                    val parameterType = getParameterUpperBound(0, type)
+                    getRxSingleJsonConverter(parameterType) as Converter<ResponseBody, Class<*>>
+                }
+                getRxSingleJsonConverter(type) as Converter<ResponseBody, Class<*>>
+            }
             else -> getJsonConverter(type) as Converter<ResponseBody, Class<*>>
         }
-
-
-
-
-
-
-
-
-
-        /*var parameterType: Type
-
-        if (type is ParameterizedType) {
-
-            parameterType = getParameterUpperBound(0, type)
-
-            if (Types.getRawType(type) == Flow::class.java) {
-
-                /**
-                 * When is Set of Elements
-                 */
-                if (parameterType is ParameterizedType) {
-                    parameterType = getParameterUpperBound(0, parameterType)
-                }
-
-                return FlowJsonConverter.getInstance<Any>(
-                    Class.forName((parameterType as Class<*>).name)
-                ) as Converter<ResponseBody, Class<*>>
-            }
-        }
-
-        return JsonConverter.getInstance(
-            Class.forName((type as Class<*>).name)
-        ) as Converter<ResponseBody, Class<*>>
-
-         */
     }
 
     private fun getJsonConverter(type: Type): JsonConverter {
@@ -112,13 +84,33 @@ class JsonApiConverterFactory : Converter.Factory() {
         )
     }
 
+    private fun getRxSingleJsonConverter(type: Type): RxObservableJsonConverter<*> {
+        /**
+         * When is Set of Elements
+         */
+        if (type is ParameterizedType) {
+            var parameterType = getParameterUpperBound(0, type)
+
+            return RxObservableJsonConverter.getInstance<Any>(
+                Class.forName((parameterType as Class<*>).name)
+            )
+        }
+
+        return RxObservableJsonConverter.getInstance<Any>(
+            Class.forName((type as Class<*>).name)
+        )
+    }
+
     internal class JsonConverter(val classReference: Class<*>): Converter<ResponseBody?, Any?> {
         @Throws(Exception::class)
         override fun convert(responseBody: ResponseBody?): Any? {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
            return HandleJsonApiConverter().exec {
                val jsonObject = JSONObject(responseBody?.string())
-               moshi.adapter(classReference).fromJson(jsonObject.toString())
+               val listType = Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
+               val jsonAdapter: JsonAdapter<JsonApiListResponse<ZoneCoverage>> = moshi.adapter(listType)
+               val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
+               JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject as JsonApiListResponse<*>)
             }
         }
 
@@ -166,6 +158,38 @@ class JsonApiConverterFactory : Converter.Factory() {
         companion object {
             fun <T>getInstance(classReference: Class<*>) =
                 FlowJsonConverter<T>(
+                    classReference
+                )
+        }
+    }
+
+
+    internal class RxObservableJsonConverter<T>(val classReference: Class<*>): Converter<ResponseBody?, Single<List<*>>?> {
+        @Throws(IOException::class)
+        override fun convert(responseBody: ResponseBody?): Single<List<*>> {
+
+            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+            return Single.create { singleEmitter ->
+
+                val jsonObject = JSONObject(responseBody?.string()).toString()
+
+                val listType = Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
+                val jsonAdapter: JsonAdapter<JsonApiListResponse<ZoneCoverage>> = moshi.adapter(listType)
+                val jsonApiObject = jsonAdapter.fromJson(jsonObject)
+                //val responseObject = moshi.adapter(ZoneCoverage::class.java).fromJson("{\"country_name\":\"Colombia\",\"city_name\":\"Bogotá, D.C.\"}")
+                //val responseObject = moshi.adapter(classReference).fromJson(a.toString())
+
+                JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject!!)?.let {
+                    singleEmitter.onSuccess(it)
+                }
+
+            }
+        }
+
+        companion object {
+            fun <T>getInstance(classReference: Class<*>) =
+                RxObservableJsonConverter<T>(
                     classReference
                 )
         }

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
@@ -24,9 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GlobalScope.launch {
-            testApiDataWithError1()
-        }
+        testApiDataRxObservableList()
     }
 
     private suspend fun testApiData1(){
@@ -50,6 +51,32 @@ class MainActivity : AppCompatActivity() {
                     val result = it
                 }
         }
+    }
+
+    private fun testApiDataRxSingleList() {
+        getRetrofitInstance()
+            .create(TestApi::class.java)
+            .getDataSingleList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                val response = it
+            }, {
+                val err = it
+            })
+    }
+
+    private fun testApiDataRxObservableList() {
+        getRetrofitInstance()
+            .create(TestApi::class.java)
+            .getDataSingleList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                val response = it
+            }, {
+                val err = it
+            })
     }
 
     private suspend fun testApiDataWithError1(){
@@ -91,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(JsonApiConverterFactory())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(JsonApiCallAdapterFactory.create()) /*Add for catch HttpException*/
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
 }
