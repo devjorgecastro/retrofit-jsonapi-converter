@@ -1,6 +1,33 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = 'RetrofitJsonApiConverter' //The repository name in Bintray dashboard
+    bintrayName = 'tech.jorgecastro.retrofit-jsonapi-converter' // The package name of the Bintray repository
+
+    libraryName = 'retrofit-jsonapi-converter' // The module name in the Android Studio project
+
+    //Artifact Information
+    // For example, tech.jorgecastro:retrofit-jsonapi-converter:1.0.0-alpha1
+    publishedGroupId = 'tech.jorgecastro'
+    artifact = 'retrofit-jsonapi-converter'
+    libraryVersion = '1.0.0-alpha1'
+
+    libraryDescription = 'Library to convert responses from a jsonapi-formatted web service to class objects'
+
+    siteUrl = 'https://github.com/devjorgecastro/retrofit-jsonapi-converter'
+    gitUrl = 'https://github.com/devjorgecastro/retrofit-jsonapi-converter.git'
+
+    developerId = 'devjorgecastro'
+    developerName = 'Jorge Castro'
+    developerEmail = 'devjorgecastro@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 29
@@ -41,3 +68,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.19"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.0'
 }
+
+//Add these lines to publish library to bintray
+//Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
