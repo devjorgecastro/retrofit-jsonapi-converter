@@ -24,6 +24,18 @@ dependencies {
 }
 ```
 
+# Usage example
+```kotlin
+dataApi.getMyDataList()
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        // List<MyData>
+    }, {
+        // Code for Error
+    })
+```
+
 # Author
 Jorge Castro - [@devjorgecastro on GitHub](https://github.com/devjorgecastro), [@devjcastro on Twitter](https://twitter.com/devjcastro)
 
