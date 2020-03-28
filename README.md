@@ -24,13 +24,34 @@ dependencies {
 }
 ```
 
+# Basic setup
+add the following line when creating the retrofit instance:
+`addConverterFactory(JsonApiConverterFactory())`
+```
+Retrofit.Builder()
+    .baseUrl(baseUrl)
+    .client(httpClient)
+    .addConverterFactory(JsonApiConverterFactory())
+    .build()
+```
+
 # Usage example
+Note:warning:: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
+```kotlin
+interface TestApi {
+
+    @JsonApiMethod
+    @GET("PATH_URL")
+    fun getMyDataList(): Single<List<MyDto>>
+}
+```
+
 ```kotlin
 dataApi.getMyDataList()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
-        // List<MyData>
+        // List<MyDto>
     }, {
         // Code for Error
     })
