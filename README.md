@@ -7,6 +7,11 @@ Written purely in kotlin :heart_eyes::heart:
 retrofit-jsonapi-converter is a Kotlin library for Android that adapts with retrofit to be able to map http responses with jsonapi.  
 [see jsonapi specification](https://jsonapi.org/)
 
+__Support__
++ RxJava Observables
+  - Single
++ Coroutine Flow
+
 # Introduction
 In recent years, the Rest architecture has been widely adopted for the exchange of information between web services and clients (client-server). JsonApi is a standard that works over HTTP; it was created to help define a more consistent response standard within the development team to increase productivity and efficiency; Thus reducing the number of requests and the size of the data packets transported between the client and the server.
 
@@ -26,7 +31,7 @@ dependencies {
 
 # Basic setup
 add the following line when creating the retrofit instance:
-`addConverterFactory(JsonApiConverterFactory())`
+**addConverterFactory(JsonApiConverterFactory())**
 ```
 Retrofit.Builder()
     .baseUrl(baseUrl)
@@ -35,7 +40,7 @@ Retrofit.Builder()
     .build()
 ```
 
-# Usage example
+# Basic example
 :warning:Note: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
 ```kotlin
 interface TestApi {
