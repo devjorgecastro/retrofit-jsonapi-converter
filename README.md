@@ -69,6 +69,8 @@ __JsonApi__
 }
 ```
 
+:relaxed:**retrofit-jsonapi-converter** helps you to work with jsonapi responses in a simpler way, as you were used to with restful.
+
 # Getting started
 ### Setting up the dependency
 Add retrofit-jsonapi-converter as Gradle build dependency.
