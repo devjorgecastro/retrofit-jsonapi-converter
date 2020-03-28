@@ -15,6 +15,60 @@ __Support__
 # Introduction
 In recent years, the Rest architecture has been widely adopted for the exchange of information between web services and clients (client-server). JsonApi is a standard that works over HTTP; it was created to help define a more consistent response standard within the development team to increase productivity and efficiency; Thus reducing the number of requests and the size of the data packets transported between the client and the server.
 
+# Differences between Restful and JsonApi
+Let's look at the difference between a list of articles with their respective authors
+
+__Restful__
+```js
+[
+  {
+    "id": "1",
+    "title": "JSON:API paints my bikeshed!",
+    "body": "The shortest article. Ever.",
+    "created": "2015-05-22T14:56:29.000Z",
+    "updated": "2015-05-22T14:56:28.000Z",
+    "author": {
+      "id": "42",
+      "name": "John",
+      "age": 80,
+      "gender": "male"
+    }
+  }
+]
+```
+
+__JsonApi__
+```json
+{
+  "data": [{
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API paints my bikeshed!",
+      "body": "The shortest article. Ever.",
+      "created": "2015-05-22T14:56:29.000Z",
+      "updated": "2015-05-22T14:56:28.000Z"
+    },
+    "relationships": {
+      "author": {
+        "data": {"id": "42", "type": "people"}
+      }
+    }
+  }],
+  "included": [
+    {
+      "type": "people",
+      "id": "42",
+      "attributes": {
+        "name": "John",
+        "age": 80,
+        "gender": "male"
+      }
+    }
+  ]
+}
+```
+
 # Getting started
 ### Setting up the dependency
 Add retrofit-jsonapi-converter as Gradle build dependency.
