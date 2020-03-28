@@ -36,7 +36,7 @@ Retrofit.Builder()
 ```
 
 # Usage example
-Note:warning:: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
+:warning:Note: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
 ```kotlin
 interface TestApi {
 
