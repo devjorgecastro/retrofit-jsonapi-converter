@@ -37,7 +37,7 @@ __RESTful__
 ]
 ```
 
-__JsonApi__
+__JsonApi__ ([see Json Api specification](https://jsonapi.org/))
 ```json
 {
   "data": [{
