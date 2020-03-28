@@ -18,7 +18,7 @@ In recent years, the Rest architecture has been widely adopted for the exchange 
 # Differences between Restful and JsonApi
 Let's look at the difference between a list of articles with their respective authors
 
-__Restful__
+__RESTful__
 ```js
 [
   {
