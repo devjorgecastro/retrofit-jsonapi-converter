@@ -29,22 +29,15 @@ class JsonApiConverterFactory : Converter.Factory() {
         annotations: Array<Annotation?>?,
         retrofit: Retrofit?
     ): Converter<ResponseBody, Class<*>> {
-        //return JsonConverter.INSTANCE as Converter<ResponseBody, *>
-
         return when (Types.getRawType(type)) {
             Flow::class.java -> {
                 if (type is ParameterizedType) {
                     val parameterType = getParameterUpperBound(0, type)
                     getFlowJsonConverter(parameterType) as Converter<ResponseBody, Class<*>>
                 }
-                getFlowJsonConverter(type) as Converter<ResponseBody, Class<*>>
-            }
-            Single::class.java -> {
-                if (type is ParameterizedType) {
-                    val parameterType = getParameterUpperBound(0, type)
-                    getRxSingleJsonConverter(parameterType) as Converter<ResponseBody, Class<*>>
+                else {
+                    getFlowJsonConverter(type) as Converter<ResponseBody, Class<*>>
                 }
-                getRxSingleJsonConverter(type) as Converter<ResponseBody, Class<*>>
             }
             else -> getJsonConverter(type) as Converter<ResponseBody, Class<*>>
         }
@@ -56,10 +49,9 @@ class JsonApiConverterFactory : Converter.Factory() {
          */
         if (type is ParameterizedType) {
             var parameterType = getParameterUpperBound(0, type)
-
-            return JsonConverter.getInstance(
-                Class.forName((parameterType as Class<*>).name)
-            )
+            val packageClass = (parameterType as Class<*>).name
+            val aClass = Class.forName(packageClass)
+            return JsonConverter.getInstance(aClass)
         }
 
         return JsonConverter.getInstance(
@@ -80,23 +72,6 @@ class JsonApiConverterFactory : Converter.Factory() {
         }
 
         return FlowJsonConverter.getInstance<Any>(
-            Class.forName((type as Class<*>).name)
-        )
-    }
-
-    private fun getRxSingleJsonConverter(type: Type): RxObservableJsonConverter<*> {
-        /**
-         * When is Set of Elements
-         */
-        if (type is ParameterizedType) {
-            var parameterType = getParameterUpperBound(0, type)
-
-            return RxObservableJsonConverter.getInstance<Any>(
-                Class.forName((parameterType as Class<*>).name)
-            )
-        }
-
-        return RxObservableJsonConverter.getInstance<Any>(
             Class.forName((type as Class<*>).name)
         )
     }
@@ -158,38 +133,6 @@ class JsonApiConverterFactory : Converter.Factory() {
         companion object {
             fun <T>getInstance(classReference: Class<*>) =
                 FlowJsonConverter<T>(
-                    classReference
-                )
-        }
-    }
-
-
-    internal class RxObservableJsonConverter<T>(val classReference: Class<*>): Converter<ResponseBody?, Single<List<*>>?> {
-        @Throws(IOException::class)
-        override fun convert(responseBody: ResponseBody?): Single<List<*>> {
-
-            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
-            return Single.create { singleEmitter ->
-
-                val jsonObject = JSONObject(responseBody?.string()).toString()
-
-                val listType = Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
-                val jsonAdapter: JsonAdapter<JsonApiListResponse<ZoneCoverage>> = moshi.adapter(listType)
-                val jsonApiObject = jsonAdapter.fromJson(jsonObject)
-                //val responseObject = moshi.adapter(ZoneCoverage::class.java).fromJson("{\"country_name\":\"Colombia\",\"city_name\":\"Bogotá, D.C.\"}")
-                //val responseObject = moshi.adapter(classReference).fromJson(a.toString())
-
-                JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject!!)?.let {
-                    singleEmitter.onSuccess(it)
-                }
-
-            }
-        }
-
-        companion object {
-            fun <T>getInstance(classReference: Class<*>) =
-                RxObservableJsonConverter<T>(
                     classReference
                 )
         }
