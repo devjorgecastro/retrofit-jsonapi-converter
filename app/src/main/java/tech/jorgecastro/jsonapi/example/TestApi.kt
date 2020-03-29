@@ -28,6 +28,11 @@ interface TestApi {
     suspend fun getDataWithError1(): List<ZoneCoverage>
 
 
+    @JsonApiMethod
+    @GET("v2/5e797e302d0000ab7b18bd39")
+    fun getDataWithObservableError(): Observable<List<ZoneCoverage>>
+
+
     // Relationship
     @JsonApiMethod
     //@GET("v2/5e7fe9e62f00003f57bac586")

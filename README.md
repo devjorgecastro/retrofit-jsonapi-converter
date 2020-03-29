@@ -1,6 +1,6 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
-[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha2) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha2/link)
+[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha3) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha3/link)
 
 Written purely in kotlin :heart_eyes::heart:
 
@@ -94,6 +94,7 @@ Retrofit.Builder()
     .baseUrl(baseUrl)
     .client(httpClient)
     .addConverterFactory(JsonApiConverterFactory())
+    .addCallAdapterFactory(JsonApiCallAdapterFactory.create())
     .build()
 ```
 
@@ -116,6 +117,49 @@ dataApi.getMyDataList()
         // List<MyDto>
     }, {
         // Code for Error
+    })
+```
+
+# Error Objects
+When you work with JsonApi you can find multiple problems, these are represented in an array of errors. JsonApi returns a JsonApiException when http 4xx codes are processed
+### Example
+```json
+{
+  "jsonapi": { "version": "1.0" },
+  "errors": [
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/firstName" },
+      "title":  "Value is too short",
+      "detail": "First name must contain at least three characters."
+    },
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/password" },
+      "title": "Passwords must contain a letter, number, and punctuation character.",
+      "detail": "The password provided is missing a punctuation character."
+    },
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/password" },
+      "title": "Password and password confirmation do not match."
+    }
+  ]
+}
+```
+#### Kotlin
+```kotlin
+getRetrofitInstance()
+    .create(TestApi::class.java)
+    .getDataWithObservableError()
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        // Success
+    }, {
+        if (it is JsonApiResponseException) { // Exception type for JsonApi errors
+            val errorData = it.data // List of errors with data attribute.
+        }
     })
 ```
 

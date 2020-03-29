@@ -6,6 +6,7 @@ import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -20,15 +21,21 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 import kotlin.system.measureTimeMillis
-import kotlin.time.measureTime
 
 class MainActivity : AppCompatActivity() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getArticles()
+        testApiDataWithObservableErrors()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
     }
 
     private suspend fun testApiData1(){
@@ -55,37 +62,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun testApiDataRxSingleList() {
-        getRetrofitInstance()
-            .create(TestApi::class.java)
-            .getDataSingleList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                val response = it
-            }, {
-                val err = it
-            })
-    }
-
-    private fun testApiDataRxObservableList() {
-        getRetrofitInstance()
-            .create(TestApi::class.java)
-            .getDataSingleList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                val response = it
-            }, {
-                val err = it
-            })
-    }
-
-    private fun getArticles() {
-
-        val time = measureTimeMillis {
+        compositeDisposable.add(
             getRetrofitInstance()
                 .create(TestApi::class.java)
-                .getArticles()
+                .getDataSingleList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -93,8 +73,58 @@ class MainActivity : AppCompatActivity() {
                 }, {
                     val err = it
                 })
+        )
+    }
+
+    private fun testApiDataRxObservableList() {
+        compositeDisposable.add(
+            getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getDataSingleList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    val response = it
+                }, {
+                    val err = it
+                })
+        )
+    }
+
+    private fun getArticles() {
+
+        val time = measureTimeMillis {
+            compositeDisposable.add(
+                getRetrofitInstance()
+                    .create(TestApi::class.java)
+                    .getArticles()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        val response = it
+                    }, {
+                        val err = it
+                    })
+            )
         }
         Log.d("Total", "$time")
+    }
+
+    private fun testApiDataWithObservableErrors() {
+        compositeDisposable.add(
+            getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getDataWithObservableError()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    val response = it
+                }, {
+                    if (it is JsonApiResponseException) {
+                        val errorData = it.data
+                    }
+                })
+        )
     }
 
     private suspend fun testApiDataWithError1(){
