@@ -105,21 +105,30 @@ interface TestApi {
 
     @JsonApiMethod
     @GET("PATH_URL")
-    fun getMyDataList(): Single<List<Article>>
+    fun getArticles(): Single<List<Article>>
     
     @JsonApiMethod
-    @GET("PATH_URL")
-    fun getMyDataList(): Single<Article>
+    @GET("PATH_URL/{id}")
+    fun getArticle(@Path("id") id: Int): Single<Article>
 }
 ```
 
 ```kotlin
 val dataApi = getRetrofitApi()
-dataApi.getMyDataList()
+dataApi.getArticles()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
-        // Article or List<Article>
+        // List<Article>
+    }, {
+        // Code for Error
+    })
+    
+dataApi.getArticle(1)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        // Article
     }, {
         // Code for Error
     })
