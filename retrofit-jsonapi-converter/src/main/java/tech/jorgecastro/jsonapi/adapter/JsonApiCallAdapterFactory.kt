@@ -25,7 +25,7 @@ class JsonApiCallAdapterFactory private constructor():
             }
             else -> {
                 val type = getParameterUpperBound(0, returnType as ParameterizedType)
-                return JsonApiCallAdapter<Any>(type)
+                JsonApiCallAdapter<Any>(type)
             }
         }
     }

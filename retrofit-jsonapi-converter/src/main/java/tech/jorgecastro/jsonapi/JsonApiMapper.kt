@@ -4,6 +4,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
+import tech.jorgecastro.jsonapi.dto.Article
+import tech.jorgecastro.jsonapi.dto.People
 import tech.jorgecastro.jsonapi.dto.ZoneCoverage
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
@@ -129,14 +131,17 @@ class JsonApiMapper {
         return input.data?.attributes as T
     }
 
-    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiListResponse<*>): List<T>? {
+    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        val resourceId = JsonApiID(T::class)
+        val kClassReferenceGenericType = T::class
+        //val resourceId = JsonApiID(T::class)
+        val resourceId = JsonApiID(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
          */
-        val jaRelationship = getRelationshipFromJsonApiData(T::class)
+        //val jaRelationship = getRelationshipFromJsonApiData(T::class)
+        val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
         input.included?.let { listInclude ->
             listData?.forEach loopListData@ {  jsonApiData ->
@@ -151,7 +156,16 @@ class JsonApiMapper {
                     val relationship = (relationships[key] as Map<*,*>)
                     if ( relationship.containsKey("data") ) {
 
-                        val listRelationship = (relationship["data"]  as List< Map<*,*>>)
+
+                        var listRelationship = arrayListOf<Map<*, *>>()
+                        if (relationship["data"] is ArrayList<*>) {
+                            listRelationship = (relationship["data"] as ArrayList<Map<*, *>>)
+                        }
+                        else {
+                            listRelationship.add((relationship["data"] as Map<*, *>))
+                        }
+
+
                         val listIncludeObjectsMaps = arrayListOf<Map<String, *>>()
 
                         listRelationship.forEach { relationship ->
@@ -242,8 +256,8 @@ class JsonApiMapper {
         }
 
         return input.data?.flatMap {
-            val newList = arrayListOf<T>()
-            newList.add(it.attributes as T)
+            val newList = arrayListOf<Any>()
+            newList.add(it.attributes!!)
             newList
         }
     }
@@ -344,5 +358,7 @@ class JsonApiMapper {
 
 
 val annotationList = listOf(
-    ZoneCoverage::class
+    ZoneCoverage::class,
+    Article::class,
+    People::class
 )

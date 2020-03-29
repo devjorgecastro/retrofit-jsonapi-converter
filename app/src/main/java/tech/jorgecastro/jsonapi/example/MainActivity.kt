@@ -2,6 +2,7 @@ package tech.jorgecastro.jsonapi.example
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,14 +13,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.converter.JsonApiConverterFactory
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
+import kotlin.system.measureTimeMillis
+import kotlin.time.measureTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testApiDataRxObservableList()
+        getArticles()
     }
 
     private suspend fun testApiData1(){
@@ -77,6 +78,23 @@ class MainActivity : AppCompatActivity() {
             }, {
                 val err = it
             })
+    }
+
+    private fun getArticles() {
+
+        val time = measureTimeMillis {
+            getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getArticles()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    val response = it
+                }, {
+                    val err = it
+                })
+        }
+        Log.d("Total", "$time")
     }
 
     private suspend fun testApiDataWithError1(){

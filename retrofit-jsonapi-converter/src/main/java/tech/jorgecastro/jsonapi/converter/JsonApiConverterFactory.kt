@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.JsonApiListResponse
 import tech.jorgecastro.jsonapi.JsonApiMapper
 import tech.jorgecastro.jsonapi.dto.ZoneCoverage
+import tech.jorgecastro.jsonapi.getList
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -82,9 +83,11 @@ class JsonApiConverterFactory : Converter.Factory() {
            return HandleJsonApiConverter().exec {
                val jsonObject = JSONObject(responseBody?.string())
                val listType = Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
-               val jsonAdapter: JsonAdapter<JsonApiListResponse<ZoneCoverage>> = moshi.adapter(listType)
+               val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)
                val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
-               JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject as JsonApiListResponse<*>)
+
+               jsonApiObject?.getList(classReference.kotlin)
+               JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject as JsonApiListResponse<*>, rawType = classReference.kotlin)
             }
         }
 
@@ -121,7 +124,7 @@ class JsonApiConverterFactory : Converter.Factory() {
                             //val responseObject = moshi.adapter(ZoneCoverage::class.java).fromJson("{\"country_name\":\"Colombia\",\"city_name\":\"Bogotá, D.C.\"}")
                             //val responseObject = moshi.adapter(classReference).fromJson(a.toString())
 
-                            JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject!!)?.let {
+                            JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject!!, rawType = classReference.kotlin)?.let {
                                 cancellableContinuation.resume(it)
                             }
                     }
