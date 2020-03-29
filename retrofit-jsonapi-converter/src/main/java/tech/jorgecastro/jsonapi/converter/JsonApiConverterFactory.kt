@@ -86,7 +86,6 @@ class JsonApiConverterFactory : Converter.Factory() {
                val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)
                val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
 
-               jsonApiObject?.getList(classReference.kotlin)
                JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject as JsonApiListResponse<*>, rawType = classReference.kotlin)
             }
         }
