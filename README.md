@@ -1,5 +1,7 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
+:warning::warning::warning::warning:**Currently in experimental mode**:warning::warning::warning::warning:
+
 [ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha3) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha3/link)
 
 Written purely in kotlin :heart_eyes::heart:
