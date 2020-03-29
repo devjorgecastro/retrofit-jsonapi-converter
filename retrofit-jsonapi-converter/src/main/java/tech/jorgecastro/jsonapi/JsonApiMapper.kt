@@ -8,6 +8,8 @@ import tech.jorgecastro.jsonapi.dto.Article
 import tech.jorgecastro.jsonapi.dto.People
 import tech.jorgecastro.jsonapi.dto.ZoneCoverage
 import java.lang.reflect.Field
+import java.lang.reflect.ParameterizedType
+import kotlin.jvm.internal.Reflection
 import kotlin.reflect.KClass
 
 class JsonApiMapper {
@@ -18,13 +20,13 @@ class JsonApiMapper {
     data class JARelationship(val field: Field, val jsonApiRelationshipAnnotation: JsonApiRelationship)
 
 
-    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiResponse<*>): T? {
-        val resourceId = JsonApiID(T::class)
+    fun jsonApiMapToListObject(input: JsonApiResponse<*>, rawType: KClass<*>): Any? {
+        val resourceId = JsonApiID(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
          */
-        val jaRelationship = getRelationshipFromJsonApiData(T::class)
+        val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
         input.included?.let { listInclude ->
             input.data?.let {  jsonApiData ->
@@ -54,7 +56,8 @@ class JsonApiMapper {
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
-                                    val kClassRelationship = getRelationshipReference(type)
+                                    //val kClassRelationship = getRelationshipReference(type)
+                                    val kClassRelationship = getRawTypeRelationship(rawType, type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
                                         listIncludeObjectsMaps.add(mapOf(key.toString() to includeRel))
@@ -128,12 +131,12 @@ class JsonApiMapper {
             }
         }
 
-        return input.data?.attributes as T
+        return input.data?.attributes
     }
 
-    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
+    fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        val kClassReferenceGenericType = T::class
+        //val kClassReferenceGenericType = T::class
         //val resourceId = JsonApiID(T::class)
         val resourceId = JsonApiID(rawType)
 
@@ -180,7 +183,8 @@ class JsonApiMapper {
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
-                                    val kClassRelationship = getRelationshipReference(type)
+                                    val kClassRelationship = getRawTypeRelationship(rawType, type)
+                                    //val kClassRelationship = getRelationshipReference(type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
                                         listIncludeObjectsMaps.add(mapOf(key.toString() to includeRel))
@@ -303,6 +307,50 @@ class JsonApiMapper {
         return relationshipObject
     }
 
+
+    /**
+     * Función para obtener el RawType de una relación a través del nombre especificado
+     * en el atributo name de JsonApiRelationship
+     */
+    fun getRawTypeRelationship(mainRawType: KClass<*>, relationship: String): KClass<*>? {
+
+        var kClassResponse: KClass<*>? = null
+
+        /**
+         * Obtenemos todas las relaciones por cada uno de los campos y luego
+         * verificamos que el argumento relationship sea igual a los nombres del
+         * atributo name de JsonApiRelationship
+         */
+        run loop@{
+            mainRawType.java.declaredFields.forEach { field ->
+
+                /**
+                 * Se obtienen todas las anotaciones del tipo JsonApiRelationship
+                 */
+                val jsonApiRelationshipFiltered = field.annotations.filterIsInstance<JsonApiRelationship>()
+                jsonApiRelationshipFiltered.forEach { jsonapiRelationship ->
+                    if (jsonapiRelationship.name == relationship) {
+
+                        if (field.type == List::class.java &&
+                            (field.genericType is ParameterizedType)) {
+
+                            val classResponse = (field.genericType as ParameterizedType).actualTypeArguments.firstOrNull() as Class<*>
+                            kClassResponse = Reflection.createKotlinClass(classResponse)
+                            return@loop
+                        }
+                        else {
+                            kClassResponse = field.type.kotlin
+                            return@loop
+                        }
+                    }
+                }
+            }
+        }
+
+        return kClassResponse
+    }
+
+    @Deprecated(message = "This function is deprecated")
     inline fun getRelationshipReference(relationship: String): KClass<*>? {
         var response: KClass<*>? = null
 

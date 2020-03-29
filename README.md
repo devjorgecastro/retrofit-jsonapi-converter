@@ -1,6 +1,6 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
-[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha1) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha1/link)
+[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha4) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha4/link)
 
 Written purely in kotlin :heart_eyes::heart:
 
@@ -94,6 +94,7 @@ Retrofit.Builder()
     .baseUrl(baseUrl)
     .client(httpClient)
     .addConverterFactory(JsonApiConverterFactory())
+    .addCallAdapterFactory(JsonApiCallAdapterFactory.create())
     .build()
 ```
 
@@ -104,18 +105,74 @@ interface TestApi {
 
     @JsonApiMethod
     @GET("PATH_URL")
-    fun getMyDataList(): Single<List<MyDto>>
+    fun getArticles(): Single<List<Article>>
+    
+    @JsonApiMethod
+    @GET("PATH_URL/{id}")
+    fun getArticle(@Path("id") id: Int): Single<Article>
 }
 ```
 
 ```kotlin
-dataApi.getMyDataList()
+val dataApi = getRetrofitApi()
+dataApi.getArticles()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
-        // List<MyDto>
+        // List<Article>
     }, {
         // Code for Error
+    })
+    
+dataApi.getArticle(1)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        // Article
+    }, {
+        // Code for Error
+    })
+```
+
+# Error Objects
+When you work with JsonApi you can find multiple problems, these are represented in an array of errors. JsonApi returns a JsonApiException when http 4xx codes are processed
+### Example
+```json
+{
+  "jsonapi": { "version": "1.0" },
+  "errors": [
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/firstName" },
+      "title":  "Value is too short",
+      "detail": "First name must contain at least three characters."
+    },
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/password" },
+      "title": "Passwords must contain a letter, number, and punctuation character.",
+      "detail": "The password provided is missing a punctuation character."
+    },
+    {
+      "code":   "400",
+      "source": { "pointer": "/data/attributes/password" },
+      "title": "Password and password confirmation do not match."
+    }
+  ]
+}
+```
+#### Kotlin
+```kotlin
+val dataApi = getRetrofitApi()
+dataApi.getDataWithObservableError()
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe({
+        // Success
+    }, {
+        if (it is JsonApiResponseException) { // Exception type for JsonApi errors
+            val errorData = it.data // List of errors with data attribute.
+        }
     })
 ```
 
