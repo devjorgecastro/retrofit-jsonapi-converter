@@ -105,7 +105,11 @@ interface TestApi {
 
     @JsonApiMethod
     @GET("PATH_URL")
-    fun getMyDataList(): Single<List<MyDto>>
+    fun getMyDataList(): Single<List<Article>>
+    
+    @JsonApiMethod
+    @GET("PATH_URL")
+    fun getMyDataList(): Single<Article>
 }
 ```
 
@@ -115,7 +119,7 @@ dataApi.getMyDataList()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
-        // List<MyDto>
+        // Article or List<Article>
     }, {
         // Code for Error
     })
