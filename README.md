@@ -9,6 +9,7 @@ retrofit-jsonapi-converter is a Kotlin library for Android that adapts with retr
 
 __Support__
 + RxJava Observables
+  - Observable
   - Single
 + Coroutine Flow
 
