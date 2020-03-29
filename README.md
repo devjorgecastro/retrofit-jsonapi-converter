@@ -110,6 +110,7 @@ interface TestApi {
 ```
 
 ```kotlin
+val dataApi = getRetrofitApi()
 dataApi.getMyDataList()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
@@ -149,9 +150,8 @@ When you work with JsonApi you can find multiple problems, these are represented
 ```
 #### Kotlin
 ```kotlin
-getRetrofitInstance()
-    .create(TestApi::class.java)
-    .getDataWithObservableError()
+val dataApi = getRetrofitApi()
+dataApi.getDataWithObservableError()
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())
     .subscribe({
