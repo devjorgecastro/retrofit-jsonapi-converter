@@ -14,7 +14,6 @@ import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.JsonApiListResponse
 import tech.jorgecastro.jsonapi.JsonApiMapper
 import tech.jorgecastro.jsonapi.dto.ZoneCoverage
-import tech.jorgecastro.jsonapi.getList
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -86,7 +85,6 @@ class JsonApiConverterFactory : Converter.Factory() {
                val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)
                val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
 
-               jsonApiObject?.getList(classReference.kotlin)
                JsonApiMapper().jsonApiMapToListObject<ZoneCoverage>(input = jsonApiObject as JsonApiListResponse<*>, rawType = classReference.kotlin)
             }
         }
