@@ -87,9 +87,10 @@ dependencies {
 ```
 
 # Basic setup
-add the following line when creating the retrofit instance:
-**addConverterFactory(JsonApiConverterFactory())**
-```
+add the following lines when creating the retrofit instance:
+* **addConverterFactory(JsonApiConverterFactory())**
+* **addCallAdapterFactory(JsonApiCallAdapterFactory.create())**
+```kotlin
 Retrofit.Builder()
     .baseUrl(baseUrl)
     .client(httpClient)
