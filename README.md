@@ -4,7 +4,7 @@
 
 Written purely in kotlin :heart_eyes::heart:
 
-retrofit-jsonapi-converter is a Kotlin library for Android that adapts with retrofit to be able to map http responses with jsonapi.  
+retrofit-jsonapi-converter is a Kotlin library for Android that adapts with retrofit and moshi to be able to map http responses with jsonapi.  
 [see jsonapi specification](https://jsonapi.org/)
 
 __Support__
