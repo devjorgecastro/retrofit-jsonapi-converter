@@ -92,11 +92,29 @@ add the following lines when creating the retrofit instance:
 * **addCallAdapterFactory(JsonApiCallAdapterFactory.create())**
 ```kotlin
 Retrofit.Builder()
-    .baseUrl(baseUrl)
-    .client(httpClient)
-    .addConverterFactory(JsonApiConverterFactory())
-    .addCallAdapterFactory(JsonApiCallAdapterFactory.create())
+  .baseUrl(baseUrl)
+  .client(httpClient)
+  .addConverterFactory(JsonApiConverterFactory())
+  .addCallAdapterFactory(JsonApiCallAdapterFactory.create())
+  .build()
+```
+
+# Retrofit setup with Moshi and Rxjava
+Adding **MoshiConverterFactory** and **RxJava2CallAdapterFactory**
+```kotlin
+val moshi = 
+  Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
     .build()
+            
+Retrofit.Builder()
+  .baseUrl(baseUrl)
+  .client(httpClient)
+  .addConverterFactory(JsonApiConverterFactory())
+  .addConverterFactory(MoshiConverterFactory.create(moshi))
+  .addCallAdapterFactory(JsonApiCallAdapterFactory.create())
+  .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+  .build()
 ```
 
 # Basic example
