@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -36,6 +37,32 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+    }
+
+    private suspend fun testOneData() {
+        try {
+            val response = getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getOneData()
+            val cityName = response.cityName
+        }
+        catch (e: Exception) {
+            val error = e
+        }
+    }
+
+    private suspend fun testOneDataWithFlow() {
+        withContext(Dispatchers.IO) {
+            getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getOneDataWithFlow()
+                .catch {
+                    val error = it
+                }
+                .collect {
+                    val result = it
+                }
+        }
     }
 
     private suspend fun testApiData1(){

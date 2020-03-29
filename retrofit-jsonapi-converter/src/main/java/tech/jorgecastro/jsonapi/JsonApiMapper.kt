@@ -20,13 +20,13 @@ class JsonApiMapper {
     data class JARelationship(val field: Field, val jsonApiRelationshipAnnotation: JsonApiRelationship)
 
 
-    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiResponse<*>): T? {
-        val resourceId = JsonApiID(T::class)
+    fun jsonApiMapToListObject(input: JsonApiResponse<*>, rawType: KClass<*>): Any? {
+        val resourceId = JsonApiID(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
          */
-        val jaRelationship = getRelationshipFromJsonApiData(T::class)
+        val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
         input.included?.let { listInclude ->
             input.data?.let {  jsonApiData ->
@@ -56,7 +56,8 @@ class JsonApiMapper {
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
-                                    val kClassRelationship = getRelationshipReference(type)
+                                    //val kClassRelationship = getRelationshipReference(type)
+                                    val kClassRelationship = getRawTypeRelationship(rawType, type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
                                         listIncludeObjectsMaps.add(mapOf(key.toString() to includeRel))
@@ -130,12 +131,12 @@ class JsonApiMapper {
             }
         }
 
-        return input.data?.attributes as T
+        return input.data?.attributes
     }
 
-    inline fun <reified T: Any> jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
+    fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        val kClassReferenceGenericType = T::class
+        //val kClassReferenceGenericType = T::class
         //val resourceId = JsonApiID(T::class)
         val resourceId = JsonApiID(rawType)
 

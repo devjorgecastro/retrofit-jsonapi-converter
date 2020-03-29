@@ -9,11 +9,22 @@ import tech.jorgecastro.jsonapi.dto.Article
 import tech.jorgecastro.jsonapi.dto.ZoneCoverage
 
 interface TestApi {
+
+    @JsonApiMethod
     @GET("v2/5e538c4b2e000058002dac0d")
     suspend fun getData1(): List<ZoneCoverage>
 
+    @JsonApiMethod
     @GET("v2/5e538c4b2e000058002dac0d")
     suspend fun getData2(): Flow<List<ZoneCoverage>>
+
+    @JsonApiMethod
+    @GET("v2/5e8110583000002c006f964e")
+    suspend fun getOneData(): ZoneCoverage
+
+    @JsonApiMethod
+    @GET("v2/5e8110583000002c006f964e")
+    suspend fun getOneDataWithFlow(): Flow<ZoneCoverage>
 
 
     @JsonApiMethod
