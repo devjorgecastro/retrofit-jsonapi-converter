@@ -100,7 +100,8 @@ Retrofit.Builder()
 ```
 
 # Retrofit setup with Moshi and Rxjava
-Adding **MoshiConverterFactory** and **RxJava2CallAdapterFactory**
+Adding **MoshiConverterFactory** and **RxJava2CallAdapterFactory**. </br>
+:warning:Note: In the case of RxJava, it is not necessary to add **RxJava2CallAdapterFactory** when the responses are of the JsonApi type (annotated with **@JsonApiMethod**). Retrofit JsonApi Converter allows working with Observable and Single responses.
 ```kotlin
 val moshi = 
   Moshi.Builder()
