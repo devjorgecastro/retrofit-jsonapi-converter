@@ -66,7 +66,8 @@ class JsonApiConverterFactory : Converter.Factory() {
             var parameterType = getParameterUpperBound(0, type)
 
             return FlowJsonConverter.getInstance<Any>(
-                Class.forName((parameterType as Class<*>).name)
+                Class.forName((parameterType as Class<*>).name),
+                getRawType(type)
             )
         }
 
