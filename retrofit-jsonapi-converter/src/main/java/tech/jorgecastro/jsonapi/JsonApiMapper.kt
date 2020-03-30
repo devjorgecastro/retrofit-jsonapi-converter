@@ -136,14 +136,11 @@ class JsonApiMapper {
 
     fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        //val kClassReferenceGenericType = T::class
-        //val resourceId = JsonApiID(T::class)
         val resourceId = JsonApiID(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
          */
-        //val jaRelationship = getRelationshipFromJsonApiData(T::class)
         val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
         input.included?.let { listInclude ->
@@ -184,7 +181,6 @@ class JsonApiMapper {
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
                                     val kClassRelationship = getRawTypeRelationship(rawType, type)
-                                    //val kClassRelationship = getRelationshipReference(type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
                                         listIncludeObjectsMaps.add(mapOf(key.toString() to includeRel))
@@ -350,26 +346,6 @@ class JsonApiMapper {
         return kClassResponse
     }
 
-    @Deprecated(message = "This function is deprecated")
-    inline fun getRelationshipReference(relationship: String): KClass<*>? {
-        var response: KClass<*>? = null
-
-        run annotationLoop@ {
-            annotationList.forEach { kclass ->
-                kclass.annotations.forEach { annotation ->
-
-                    (annotation as? JsonApiResource)?.let {
-                        if (annotation.name == relationship) {
-                            response = kclass
-                            return@annotationLoop
-                        }
-                    }
-                }
-            }
-        }
-        return response
-    }
-
     fun JsonApiID(kclass: KClass<*>): JAID {
         var jsonPropertyName: String? = null
         var propertyName = ""
@@ -403,10 +379,3 @@ class JsonApiMapper {
         return JAID(jsonPropertyName, propertyName)
     }
 }
-
-
-val annotationList = listOf(
-    ZoneCoverage::class,
-    Article::class,
-    People::class
-)
