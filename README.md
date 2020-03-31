@@ -47,8 +47,8 @@ __JsonApi__ ([see Json Api specification](https://jsonapi.org/))
     "attributes": {
       "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever.",
-      "created": "2015-05-22T14:56:29.000Z",
-      "updated": "2015-05-22T14:56:28.000Z"
+      "created_date": "2015-05-22T14:56:29.000Z",
+      "updated_date": "2015-05-22T14:56:28.000Z"
     },
     "relationships": {
       "author": {
@@ -133,6 +133,29 @@ interface TestApi {
 }
 ```
 
+
+### Setting the response object
+```kotlin
+
+@JsonApiResource(name = "people")
+data class People(
+    @field:Json(name = "id") var id: String = "",
+    var name: String = "",
+    var age: String = "",
+    var gender: String = ""
+)
+
+@JsonApiResource(name = "article")
+data class Article(
+    @field:Json(name = "id") val id: String = "", // required
+    val title: String = "",
+    val body: String = "",
+    @Json(name = "created_date") val createdDate: String = "",
+    @Json(name = "updated_date") val updatedDate: String = "",
+    @JsonApiRelationship(name = "people", relationship = "author") var authors: List<People>? = listOf() // name is JsonApiResource of people
+)
+```
+### Make the request
 ```kotlin
 val dataApi = getRetrofitApi()
 dataApi.getArticles()
