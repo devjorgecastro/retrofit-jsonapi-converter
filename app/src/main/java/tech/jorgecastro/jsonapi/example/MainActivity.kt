@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getArticles()
+        testOrderApiSingleRxJava()
     }
 
     override fun onDestroy() {
@@ -167,6 +167,21 @@ class MainActivity : AppCompatActivity() {
         catch (e: Exception) {
             val error = e
         }
+    }
+
+    private fun testOrderApiSingleRxJava() {
+        compositeDisposable.add(
+            getRetrofitInstance()
+                .create(OrderApi::class.java)
+                .getOrderDetail()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    val response = it
+                }, {
+                    val err = it
+                })
+        )
     }
 
     private fun getRetrofitInstance(): Retrofit {

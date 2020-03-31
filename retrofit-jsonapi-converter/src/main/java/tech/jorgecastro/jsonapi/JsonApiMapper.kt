@@ -4,9 +4,6 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
-import tech.jorgecastro.jsonapi.dto.Article
-import tech.jorgecastro.jsonapi.dto.People
-import tech.jorgecastro.jsonapi.dto.ZoneCoverage
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
@@ -281,7 +278,7 @@ class JsonApiMapper {
         return jaRelationship
     }
 
-    fun  getIncludeObject(id: String, type: String, includes: List<Any>, kClassRelationship: KClass<*>?): Any? {
+    fun getIncludeObject(id: String, type: String, includes: List<Any>, kClassRelationship: KClass<*>?): Any? {
 
         var relationshipObject: Any? = null
 
