@@ -139,7 +139,7 @@ interface TestApi {
 
 @JsonApiResource(name = "people")
 data class People(
-    @field:Json(name = "id") var id: String = "",
+    @field:Json(name = "id") var id: String = "", // required
     var name: String = "",
     var age: String = "",
     var gender: String = ""
