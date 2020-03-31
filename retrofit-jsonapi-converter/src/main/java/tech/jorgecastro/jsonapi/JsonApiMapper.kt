@@ -4,9 +4,6 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
-import tech.jorgecastro.jsonapi.dto.Article
-import tech.jorgecastro.jsonapi.dto.People
-import tech.jorgecastro.jsonapi.dto.ZoneCoverage
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
@@ -136,14 +133,11 @@ class JsonApiMapper {
 
     fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        //val kClassReferenceGenericType = T::class
-        //val resourceId = JsonApiID(T::class)
         val resourceId = JsonApiID(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
          */
-        //val jaRelationship = getRelationshipFromJsonApiData(T::class)
         val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
         input.included?.let { listInclude ->
@@ -184,7 +178,6 @@ class JsonApiMapper {
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
                                     val kClassRelationship = getRawTypeRelationship(rawType, type)
-                                    //val kClassRelationship = getRelationshipReference(type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
                                         listIncludeObjectsMaps.add(mapOf(key.toString() to includeRel))
@@ -285,7 +278,7 @@ class JsonApiMapper {
         return jaRelationship
     }
 
-    fun  getIncludeObject(id: String, type: String, includes: List<Any>, kClassRelationship: KClass<*>?): Any? {
+    fun getIncludeObject(id: String, type: String, includes: List<Any>, kClassRelationship: KClass<*>?): Any? {
 
         var relationshipObject: Any? = null
 
@@ -350,26 +343,6 @@ class JsonApiMapper {
         return kClassResponse
     }
 
-    @Deprecated(message = "This function is deprecated")
-    inline fun getRelationshipReference(relationship: String): KClass<*>? {
-        var response: KClass<*>? = null
-
-        run annotationLoop@ {
-            annotationList.forEach { kclass ->
-                kclass.annotations.forEach { annotation ->
-
-                    (annotation as? JsonApiResource)?.let {
-                        if (annotation.name == relationship) {
-                            response = kclass
-                            return@annotationLoop
-                        }
-                    }
-                }
-            }
-        }
-        return response
-    }
-
     fun JsonApiID(kclass: KClass<*>): JAID {
         var jsonPropertyName: String? = null
         var propertyName = ""
@@ -403,10 +376,3 @@ class JsonApiMapper {
         return JAID(jsonPropertyName, propertyName)
     }
 }
-
-
-val annotationList = listOf(
-    ZoneCoverage::class,
-    Article::class,
-    People::class
-)
