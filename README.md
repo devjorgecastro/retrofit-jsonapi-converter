@@ -118,7 +118,7 @@ Retrofit.Builder()
   .build()
 ```
 
-# Basic example
+# Usage example
 :warning:Note: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
 ```kotlin
 interface TestApi {
