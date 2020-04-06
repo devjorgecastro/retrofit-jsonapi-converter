@@ -6,9 +6,9 @@ import java.lang.reflect.Type
 
 class JsonApiCallAdapter<T>(
     private val responseType: Type
-): CallAdapter<T, JsonApiRetrofitCall<T>> {
-    override fun adapt(call: Call<T>): JsonApiRetrofitCall<T> {
-        return JsonApiRetrofitCall(call)
+): CallAdapter<T, JsonApiRetrofitCallAdapter<T>> {
+    override fun adapt(call: Call<T>): JsonApiRetrofitCallAdapter<T> {
+        return JsonApiRetrofitCallAdapter(call)
     }
 
     override fun responseType() = responseType
