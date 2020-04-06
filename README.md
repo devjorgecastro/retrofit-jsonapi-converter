@@ -118,7 +118,7 @@ Retrofit.Builder()
   .build()
 ```
 
-# Basic example
+# Usage example
 :warning:Note: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
 ```kotlin
 interface TestApi {
@@ -152,7 +152,8 @@ data class Article(
     val body: String = "",
     @Json(name = "created_date") val createdDate: String = "",
     @Json(name = "updated_date") val updatedDate: String = "",
-    @JsonApiRelationship(name = "people", relationship = "author") var authors: List<People>? = listOf() // name is JsonApiResource of people
+    @JsonApiRelationship(name = "people", relationship = "author")
+    var authors: List<People>? = listOf() // name is JsonApiResource of people
 )
 ```
 ### Make the request
