@@ -1,6 +1,6 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
-[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-alpha6) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-alpha6/link)
+[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-beta1) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-beta1/link)
 
 Written purely in kotlin :heart_eyes::heart:
 
@@ -47,8 +47,8 @@ __JsonApi__ ([see Json Api specification](https://jsonapi.org/))
     "attributes": {
       "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever.",
-      "created": "2015-05-22T14:56:29.000Z",
-      "updated": "2015-05-22T14:56:28.000Z"
+      "created_date": "2015-05-22T14:56:29.000Z",
+      "updated_date": "2015-05-22T14:56:28.000Z"
     },
     "relationships": {
       "author": {
@@ -118,7 +118,7 @@ Retrofit.Builder()
   .build()
 ```
 
-# Basic example
+# Usage example
 :warning:Note: add the `@JsonApiMethod` annotation to each method that responds with jsonapi format
 ```kotlin
 interface TestApi {
@@ -133,6 +133,30 @@ interface TestApi {
 }
 ```
 
+
+### Setting the response object
+```kotlin
+
+@JsonApiResource(name = "people")
+data class People(
+    @field:Json(name = "id") var id: String = "", // required
+    var name: String = "",
+    var age: String = "",
+    var gender: String = ""
+)
+
+@JsonApiResource(name = "article")
+data class Article(
+    @field:Json(name = "id") val id: String = "", // required
+    val title: String = "",
+    val body: String = "",
+    @Json(name = "created_date") val createdDate: String = "",
+    @Json(name = "updated_date") val updatedDate: String = "",
+    @JsonApiRelationship(name = "people", relationship = "author")
+    var authors: List<People>? = listOf() // name is JsonApiResource of people
+)
+```
+### Make the request
 ```kotlin
 val dataApi = getRetrofitApi()
 dataApi.getArticles()

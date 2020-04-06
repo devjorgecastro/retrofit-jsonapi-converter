@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.catch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,6 +17,7 @@ import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.converter.JsonApiConverterFactory
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -31,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testOrderApiSingleRxJava()
+        GlobalScope.launch {
+            testCountryData()
+        }
     }
 
     override fun onDestroy() {
@@ -166,6 +170,20 @@ class MainActivity : AppCompatActivity() {
         }
         catch (e: Exception) {
             val error = e
+        }
+    }
+
+    private suspend fun testCountryData() {
+        withContext(Dispatchers.IO) {
+            getRetrofitInstance()
+                .create(CountryApi::class.java)
+                .getCountryCodes()
+                .catch {
+                    val error = it
+                }
+                .collect {
+                    val data = it
+                }
         }
     }
 

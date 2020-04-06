@@ -15,4 +15,4 @@ class JsonUnsupportedClass(message: String, cause: Throwable): Exception(message
 
 class JsonApiResponseException(
     message: String,
-    val data: JsonApiError) : Exception(message, null)
+    val data: JsonApiError) : Throwable(message, null)

@@ -34,8 +34,7 @@ class JsonApiConverterFactory : Converter.Factory() {
          * se ignora el adaptador JsonApiConverterFactory
          */
         val rawType = getRawType(type)
-        val objectClass = Class.forName(rawType.name)
-        check(objectClass.annotations.filterIsInstance<JsonApiResource>().count() > 0) { return null }
+        check(checkIsJsonApiResourceAnnotation(type)) { return null }
 
         return when (rawType) {
             Flow::class.java -> {
@@ -49,6 +48,22 @@ class JsonApiConverterFactory : Converter.Factory() {
             }
             else -> getJsonConverter(type) as Converter<ResponseBody, Class<*>>
         }
+    }
+
+    private fun checkIsJsonApiResourceAnnotation(type: Type): Boolean {
+        var isJsonApi: Boolean
+        var objectClass: Class<*>
+        if (type is ParameterizedType) {
+            var newType = getParameterUpperBound(0, type)
+            while (newType is ParameterizedType) { newType = getParameterUpperBound(0, newType) }
+            objectClass = Class.forName(getRawType(newType).name)
+        }
+        else {
+            objectClass = Class.forName(getRawType(type).name)
+        }
+
+        isJsonApi = objectClass.annotations.filterIsInstance<JsonApiResource>().count() > 0
+        return isJsonApi
     }
 
     private fun getJsonConverter(type: Type): JsonConverter {
