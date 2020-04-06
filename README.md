@@ -179,7 +179,7 @@ dataApi.getArticle(1)
 ```
 
 # Error Objects
-When you work with JsonApi you can find multiple problems, these are represented in an array of errors. JsonApi returns a JsonApiException when http 4xx codes are processed
+When you work with JsonApi you can find multiple problems, these are represented in an array of errors. JsonApi returns a JsonApiException when http **4xx** codes are processed
 ### Example
 ```json
 {
