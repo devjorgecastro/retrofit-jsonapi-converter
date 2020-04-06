@@ -59,7 +59,7 @@ class JsonApiRetrofitCallAdapterTest {
         val callReturnMock = mock(Call::class.java)
         `when`(call.clone()).thenReturn(callReturnMock)
 
-        val response = call.clone()
+        val response = jsonApiRetrofitCallAdapter.clone()
         assert(call::class.java == response::class.java)
 
         verify(call).clone()
@@ -73,7 +73,7 @@ class JsonApiRetrofitCallAdapterTest {
     fun `isCanceled success`() {
         `when`(call.isCanceled).thenReturn(true)
 
-        val response = call.isCanceled
+        val response = jsonApiRetrofitCallAdapter.isCanceled
 
         assert(response)
 
@@ -85,7 +85,7 @@ class JsonApiRetrofitCallAdapterTest {
     fun `isCanceled fail`() {
         `when`(call.isCanceled).thenReturn(false)
 
-        val response = call.isCanceled
+        val response = jsonApiRetrofitCallAdapter.isCanceled
 
         assert(!response)
 
@@ -100,7 +100,7 @@ class JsonApiRetrofitCallAdapterTest {
     fun `cancel method`() {
         doNothing().`when`(call).cancel()
 
-        call.cancel()
+        jsonApiRetrofitCallAdapter.cancel()
         verify(call).cancel()
 
         verifyNoMoreInteractions(call)
@@ -115,7 +115,7 @@ class JsonApiRetrofitCallAdapterTest {
         val retrofitResponse = Response.success(200, "")
         `when`(call.execute()).thenReturn(retrofitResponse)
 
-        val response = call.execute()
+        val response = jsonApiRetrofitCallAdapter.execute()
 
         assert(response.code() == 200)
 
@@ -130,7 +130,7 @@ class JsonApiRetrofitCallAdapterTest {
         val retrofitResponse = Response.error<Throwable>(500, ResponseBody.create(mediaTypeJson, "Error"))
         `when`(call.execute()).thenReturn(retrofitResponse)
 
-        val response = call.execute()
+        val response = jsonApiRetrofitCallAdapter.execute()
 
         assert(response.code() == 500)
 
@@ -152,7 +152,7 @@ class JsonApiRetrofitCallAdapterTest {
 
         `when`(call.request()).thenReturn(requestReturn)
 
-        val request = call.request()
+        val request = jsonApiRetrofitCallAdapter.request()
 
         assertEquals(request.header("test"), requestReturn.header("test"))
 
@@ -168,7 +168,7 @@ class JsonApiRetrofitCallAdapterTest {
         val timeoutReturn = mock(Timeout::class.java)
         `when`(call.timeout()).thenReturn(timeoutReturn)
 
-        val timeout = call.timeout()
+        val timeout = jsonApiRetrofitCallAdapter.timeout()
         assert(timeout is Timeout)
 
         verify(call).timeout()
