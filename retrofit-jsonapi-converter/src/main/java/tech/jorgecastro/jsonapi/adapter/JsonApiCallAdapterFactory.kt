@@ -2,6 +2,7 @@ package tech.jorgecastro.jsonapi.adapter
 
 import io.reactivex.Observable
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import tech.jorgecastro.jsonapi.JsonApiMethod
@@ -18,14 +19,19 @@ class JsonApiCallAdapterFactory private constructor():
     ): CallAdapter<*, *>? {
 
         annotations.filterIsInstance<JsonApiMethod>().firstOrNull() ?: return null
+        require(returnType is ParameterizedType) { return null}
+
+        val parameterizedType = getParameterUpperBound(0, returnType as ParameterizedType)
+
         return when (val rawType =  getRawType(returnType)) {
             Single::class.java, Observable::class.java -> {
-                val responseType = getParameterUpperBound(0, returnType as ParameterizedType)
-                JsonApiRxJava2CallAdapter<Any>(responseType, rawType)
+                JsonApiRxJava2CallAdapter<Any>(parameterizedType, rawType)
+            }
+            Flow::class.java -> {
+                JsonApiFlowCallAdapter<Any>(parameterizedType)
             }
             else -> {
-                val type = getParameterUpperBound(0, returnType as ParameterizedType)
-                JsonApiCallAdapter<Any>(type)
+                JsonApiCallAdapter<Any>(parameterizedType)
             }
         }
     }
