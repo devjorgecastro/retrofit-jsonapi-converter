@@ -1,8 +1,8 @@
 package tech.jorgecastro.jsonapi
 
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
-import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Timeout
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -19,13 +19,17 @@ import tech.jorgecastro.jsonapi.adapter.JsonApiRetrofitCallAdapter
 class JsonApiRetrofitCallAdapterTest {
 
     @Mock
-    private lateinit var call: Call<*>
+    private lateinit var call: Call<Any>
 
-    private lateinit var jsonApiRetrofitCallAdapter: JsonApiRetrofitCallAdapter<*>
+    @Mock
+    private lateinit var callReturnMock: Call<Any>
+
+
+    private lateinit var jsonApiRetrofitCallAdapter: JsonApiRetrofitCallAdapter<Any>
 
     @Before
     fun setup() {
-        jsonApiRetrofitCallAdapter = JsonApiRetrofitCallAdapter(call)
+        jsonApiRetrofitCallAdapter = JsonApiRetrofitCallAdapter<Any>(call)
     }
 
     /**
@@ -56,7 +60,6 @@ class JsonApiRetrofitCallAdapterTest {
      */
     @Test
     fun `clone`() {
-        val callReturnMock = mock(Call::class.java)
         `when`(call.clone()).thenReturn(callReturnMock)
 
         val response = jsonApiRetrofitCallAdapter.clone()
@@ -111,9 +114,9 @@ class JsonApiRetrofitCallAdapterTest {
      */
     @Test
     fun `execute method success`() {
-
+        val mediaTypeJson = "application/json; charset=utf-8".toMediaType()
         val retrofitResponse = Response.success(200, "")
-        `when`(call.execute()).thenReturn(retrofitResponse)
+        `when`(call.execute()).thenReturn(retrofitResponse as Response<Any>)
 
         val response = jsonApiRetrofitCallAdapter.execute()
 
@@ -126,8 +129,8 @@ class JsonApiRetrofitCallAdapterTest {
     @Test
     fun `execute server error`() {
 
-        val mediaTypeJson = MediaType.get("application/json; charset=utf-8")
-        val retrofitResponse = Response.error<Throwable>(500, ResponseBody.create(mediaTypeJson, "Error"))
+        val mediaTypeJson = "application/json; charset=utf-8".toMediaType()
+        val retrofitResponse = Response.error<Any>(500, "Error".toResponseBody(mediaTypeJson))
         `when`(call.execute()).thenReturn(retrofitResponse)
 
         val response = jsonApiRetrofitCallAdapter.execute()
