@@ -2,13 +2,18 @@ package tech.jorgecastro.jsonapi.example
 
 import com.squareup.moshi.Json
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import tech.jorgecastro.jsonapi.JsonApiRelationship
 import tech.jorgecastro.jsonapi.JsonApiResource
 
 interface OrderApi {
     @GET("v2/5e8246152f00000d002fb9e9")
-    fun getOrderDetail(): Single<OrderDetail>
+    fun getOrderDetailWithRxJava(): Single<OrderDetail>
+
+
+    @GET("v2/5e8246152f00000d002fb9e9")
+    suspend fun getOrderDetailWithFlow(): Flow<OrderDetail>
 }
 
 

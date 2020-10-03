@@ -16,7 +16,7 @@ interface TestApi {
 
     @JsonApiMethod
     @GET("v2/5e538c4b2e000058002dac0d")
-    suspend fun getData2(): Flow<List<ZoneCoverage>>
+    suspend fun getDataWithFlow(): Flow<List<ZoneCoverage>>
 
     @JsonApiMethod
     @GET("v2/5e8110583000002c006f964e")
@@ -35,19 +35,19 @@ interface TestApi {
     @GET("v2/5e538c4b2e000058002dac0d")
     fun getDataSingleList(): Single<List<ZoneCoverage>>
 
+
+    @JsonApiMethod
     @GET("v2/5e797e302d0000ab7b18bd39")
-    suspend fun getDataWithError1(): List<ZoneCoverage>
+    fun getErrorDataWithFlow(): Flow<List<ZoneCoverage>>
 
 
     @JsonApiMethod
     @GET("v2/5e797e302d0000ab7b18bd39")
-    fun getDataWithObservableError(): Observable<List<ZoneCoverage>>
+    fun getErrorDataWithRxJava(): Observable<List<ZoneCoverage>>
 
 
     // Relationship
     @JsonApiMethod
-    //@GET("v2/5e7fe9e62f00003f57bac586")
-    //@GET("v2/5e7ffbad2f00003f57bac5a1")
     @GET("https://api.myjson.com/bins/15to00")
     fun getArticles(): Single<List<Article>>
 
