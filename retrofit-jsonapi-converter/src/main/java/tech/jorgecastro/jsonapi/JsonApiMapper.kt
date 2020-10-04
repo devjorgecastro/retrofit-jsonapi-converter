@@ -51,7 +51,7 @@ class JsonApiMapper {
                                 /**
                                  * Si existen coincidencias de la anotación JsonApiRelationship se obtienen los datos de include
                                  */
-                                val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
+                                val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.jsonApiResourceName == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
                                     //val kClassRelationship = getRelationshipReference(type)
                                     val kClassRelationship = getRawTypeRelationship(rawType, type)
@@ -72,7 +72,7 @@ class JsonApiMapper {
                                         annotations.forEach { annotation ->
                                             if (annotation is JsonApiRelationship) {
                                                 val valueField = listIncludeObjectsMaps
-                                                    .filter { it.containsKey(annotation.relationship)}
+                                                    .filter { it.containsKey(annotation.jsonAttrName)}
                                                     .flatMap { map ->
                                                         val newList = arrayListOf<Any>()
                                                         map[key]?.let {
@@ -175,7 +175,7 @@ class JsonApiMapper {
                                 /**
                                  * Si existen coincidencias de la anotación JsonApiRelationship se obtienen los datos de include
                                  */
-                                val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.name == type }
+                                val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.jsonApiResourceName == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
                                     val kClassRelationship = getRawTypeRelationship(rawType, type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
@@ -195,7 +195,7 @@ class JsonApiMapper {
                                         annotations.forEach { annotation ->
                                             if (annotation is JsonApiRelationship) {
                                                 val valueField = listIncludeObjectsMaps
-                                                    .filter { it.containsKey(annotation.relationship)}
+                                                    .filter { it.containsKey(annotation.jsonAttrName)}
                                                     .flatMap { map ->
                                                         val newList = arrayListOf<Any>()
                                                         map[key]?.let {
@@ -322,7 +322,7 @@ class JsonApiMapper {
                  */
                 val jsonApiRelationshipFiltered = field.annotations.filterIsInstance<JsonApiRelationship>()
                 jsonApiRelationshipFiltered.forEach { jsonapiRelationship ->
-                    if (jsonapiRelationship.name == relationship) {
+                    if (jsonapiRelationship.jsonApiResourceName == relationship) {
 
                         if (field.type == List::class.java &&
                             (field.genericType is ParameterizedType)) {

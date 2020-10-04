@@ -28,5 +28,5 @@ data class Article(
     var body: String = "",
     var created: String = "",
     var updated: String = "",
-    @JsonApiRelationship(name = "people", relationship = "author") var authors: List<People>? = listOf()
+    @JsonApiRelationship(jsonApiResourceName = "people", jsonAttrName = "author") var authors: List<People>? = listOf()
 )

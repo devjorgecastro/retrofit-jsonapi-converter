@@ -41,7 +41,7 @@ data class OrderDetail(
     @Json(name = "is_express") val isExpress: Boolean = false,
     @Json(name = "credit_card_info") val creditCardInfo: String? = null,
     @Json(name = "hash_code") val hashCode: String = "",
-    @JsonApiRelationship(name = "products", relationship = "products") var products: List<Product>? = listOf() // name is JsonApiResource of Product
+    @JsonApiRelationship(jsonApiResourceName = "products", jsonAttrName = "products") var products: List<Product>? = listOf() // name is JsonApiResource of Product
 )
 
 data class OrderDate(

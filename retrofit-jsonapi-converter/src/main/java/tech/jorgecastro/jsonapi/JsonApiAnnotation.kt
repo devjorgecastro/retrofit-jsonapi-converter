@@ -15,6 +15,16 @@ annotation class JsonApiResource(val name: String)
 @Retention(RetentionPolicy.RUNTIME)
 annotation class JsonApiField(val name: String)
 
+
+
+/**
+ * A class attribute with this annotation linked to the relationship of the jsonApi response.
+ *
+ * @param jsonApiResourceName is the name of the JsonApiResource
+ * @param jsonAttrName is the name of the attribute in the json response
+ *
+ * @see JsonApiResource
+ */
 @Target(AnnotationTarget.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-annotation class JsonApiRelationship(val name: String, val relationship: String)
+annotation class JsonApiRelationship(val jsonApiResourceName: String, val jsonAttrName: String)
