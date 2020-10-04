@@ -13,12 +13,12 @@ class JsonApiMapper {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    data class JAID(val jsonPropertyName: String?, val propertyName: String?)
+    data class JsonApiId(val jsonPropertyName: String?, val propertyName: String?)
     data class JARelationship(val field: Field, val jsonApiRelationshipAnnotation: JsonApiRelationship)
 
 
     fun jsonApiMapToListObject(input: JsonApiResponse<*>, rawType: KClass<*>): Any? {
-        val resourceId = JsonApiID(rawType)
+        val resourceId = getJsonApiId(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
@@ -133,7 +133,7 @@ class JsonApiMapper {
 
     fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        val resourceId = JsonApiID(rawType)
+        val resourceId = getJsonApiId(rawType)
 
         /**
          * Se verifican los atributos que tengan la anotación JsonApiRelationship
@@ -225,7 +225,7 @@ class JsonApiMapper {
                         jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
                             if (field.name == "id") {
                                 field.isAccessible = true
-                                field.set(jsonApiData.attributes, "${idValue}")
+                                field.set(jsonApiData.attributes, "$idValue")
                             }
                         }
                     }
@@ -244,7 +244,7 @@ class JsonApiMapper {
                         jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
                             if (field.name == "id") {
                                 field.isAccessible = true
-                                field.set(jsonApiData.attributes, "${idValue}")
+                                field.set(jsonApiData.attributes, "$idValue")
                             }
                         }
                     }
@@ -283,7 +283,7 @@ class JsonApiMapper {
         var relationshipObject: Any? = null
 
         kClassRelationship?.let {
-            val kClassRelationshipId = JsonApiID(kClassRelationship)
+            val kClassRelationshipId = getJsonApiId(kClassRelationship)
             includes.forEach { include ->
                 val includeMap = (include as Map<*,*>)
                 if (includeMap["type"] == type && includeMap[kClassRelationshipId.jsonPropertyName] == id) {
@@ -343,12 +343,12 @@ class JsonApiMapper {
         return kClassResponse
     }
 
-    fun JsonApiID(kclass: KClass<*>): JAID {
+    private fun getJsonApiId(classRef: KClass<*>): JsonApiId {
         var jsonPropertyName: String? = null
         var propertyName = ""
         var fieldName: String? = null
         run fieldsLoop@{
-            kclass.java.declaredFields.forEach { field ->
+            classRef.java.declaredFields.forEach { field ->
                 val annotations = field.annotations
                 propertyName = field.name
                 if (annotations.isNotEmpty()) {
@@ -373,6 +373,10 @@ class JsonApiMapper {
             jsonPropertyName = fieldName
         }
 
-        return JAID(jsonPropertyName, propertyName)
+        /**
+         * jsonPropertyName: es el valor dentro de una @Json para un atributo id
+         * propertyName: es el atributo de la clase anotado con @Json(name = "id")
+         */
+        return JsonApiId(jsonPropertyName, propertyName)
     }
 }

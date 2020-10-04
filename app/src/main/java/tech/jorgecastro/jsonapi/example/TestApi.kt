@@ -16,7 +16,7 @@ interface TestApi {
 
     @JsonApiMethod
     @GET("v2/5e538c4b2e000058002dac0d")
-    suspend fun getDataWithFlow(): Flow<List<ZoneCoverage>>
+    fun getDataWithFlow(): Flow<List<ZoneCoverage>>
 
     @JsonApiMethod
     @GET("v2/5e8110583000002c006f964e")

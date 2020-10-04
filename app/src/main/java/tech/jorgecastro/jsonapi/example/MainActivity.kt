@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             //getErrorDataWithRxJava()
-            getErrorDataWithFlow()
+            //getErrorDataWithFlow()
             //testOrderApiSingleRxJava()
             //testGetDataWithFlow()
-            //testGetOrderDetailWithFlow()
+            testGetOrderDetailWithFlow()
             //testGetArticlesWithRxJava()
         }
     }
