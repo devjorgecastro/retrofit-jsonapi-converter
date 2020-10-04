@@ -152,7 +152,7 @@ data class Article(
     val body: String = "",
     @Json(name = "created_date") val createdDate: String = "",
     @Json(name = "updated_date") val updatedDate: String = "",
-    @JsonApiRelationship(name = "people", relationship = "author")
+    @JsonApiRelationship(jsonApiResourceName = "people", jsonAttrName = "author")
     var authors: List<People>? = listOf() // name is JsonApiResource of people
 )
 ```
