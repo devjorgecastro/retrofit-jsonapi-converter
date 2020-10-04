@@ -53,7 +53,6 @@ class JsonApiMapper {
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.jsonApiResourceName == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
-                                    //val kClassRelationship = getRelationshipReference(type)
                                     val kClassRelationship = getRawTypeRelationship(rawType, type)
                                     val includeRelationship = getIncludeObject(relationshipMap["id"].toString(), type, listInclude, kClassRelationship)
                                     includeRelationship?.let { includeRel ->
@@ -66,7 +65,7 @@ class JsonApiMapper {
                         //includeRelationship
                         run jsonApiDataLoop@ {
                             jsonApiData.attributes?.let { dataAttributes ->
-                                dataAttributes?.javaClass?.declaredFields?.forEach { field ->
+                                dataAttributes.javaClass.declaredFields.forEach { field ->
                                     val annotations = field.annotations
                                     if (annotations.isNotEmpty()) {
                                         annotations.forEach { annotation ->
@@ -83,6 +82,7 @@ class JsonApiMapper {
 
                                                 field.isAccessible = true
                                                 field.set(dataAttributes, valueField)
+                                                field.isAccessible = false
                                                 return@jsonApiDataLoop
                                             }
                                         }
@@ -94,14 +94,16 @@ class JsonApiMapper {
                 }
 
                 //id
-                jsonApiData.javaClass.declaredFields?.forEach { field ->
+                jsonApiData.javaClass.declaredFields.forEach { field ->
                     if (field.name == resourceId.propertyName) {
                         field.isAccessible = true
                         val idValue = field.get(jsonApiData)
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
-                            if (field.name == "id") {
-                                field.isAccessible = true
-                                field.set(jsonApiData.attributes, "$idValue")
+                        field.isAccessible = false
+                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
+                            if (jsonApiDataField.name == "id") {
+                                jsonApiDataField.isAccessible = true
+                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
+                                jsonApiDataField.isAccessible = false
                             }
                         }
                     }
@@ -112,15 +114,17 @@ class JsonApiMapper {
         } ?: run {
             input.data?.let { jsonApiData ->
                 //id
-                jsonApiData.javaClass.declaredFields?.forEach { field ->
+                jsonApiData.javaClass.declaredFields.forEach { field ->
                     if (field.name == resourceId.propertyName ||
                         field.name == resourceId.jsonPropertyName) {
                         field.isAccessible = true
                         val idValue = field.get(jsonApiData)
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
-                            if (field.name == "id") {
-                                field.isAccessible = true
-                                field.set(jsonApiData.attributes, "$idValue")
+                        field.isAccessible = false
+                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
+                            if (jsonApiDataField.name == "id") {
+                                jsonApiDataField.isAccessible = true
+                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
+                                jsonApiDataField.isAccessible = false
                             }
                         }
                     }
@@ -165,9 +169,9 @@ class JsonApiMapper {
 
                         val listIncludeObjectsMaps = arrayListOf<Map<String, *>>()
 
-                        listRelationship.forEach { relationship ->
+                        listRelationship.forEach { itemRelationship ->
 
-                            val relationshipMap = (relationship as Map<*,*>)
+                            val relationshipMap = (itemRelationship as Map<*,*>)
                             if (relationshipMap.containsKey("id") && relationshipMap.containsKey("type")) {
 
                                 val type = relationshipMap["type"].toString()
@@ -189,7 +193,7 @@ class JsonApiMapper {
                         //includeRelationship
                         run jsonApiDataLoop@ {
                             jsonApiData.attributes?.let { dataAttributes ->
-                                dataAttributes?.javaClass?.declaredFields?.forEach { field ->
+                                dataAttributes.javaClass.declaredFields.forEach { field ->
                                     val annotations = field.annotations
                                     if (annotations.isNotEmpty()) {
                                         annotations.forEach { annotation ->
@@ -206,6 +210,7 @@ class JsonApiMapper {
 
                                                 field.isAccessible = true
                                                 field.set(dataAttributes, valueField)
+                                                field.isAccessible = false
                                                 return@jsonApiDataLoop
                                             }
                                         }
@@ -217,15 +222,17 @@ class JsonApiMapper {
                 }
 
                 //id
-                jsonApiData.javaClass.declaredFields?.forEach { field ->
+                jsonApiData.javaClass.declaredFields.forEach { field ->
                     if (field.name == resourceId.propertyName ||
                         field.name == resourceId.jsonPropertyName) {
                         field.isAccessible = true
                         val idValue = field.get(jsonApiData)
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
-                            if (field.name == "id") {
-                                field.isAccessible = true
-                                field.set(jsonApiData.attributes, "$idValue")
+                        field.isAccessible = false
+                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
+                            if (jsonApiDataField.name == "id") {
+                                jsonApiDataField.isAccessible = true
+                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
+                                jsonApiDataField.isAccessible = false
                             }
                         }
                     }
@@ -236,15 +243,17 @@ class JsonApiMapper {
         } ?: run {
             listData?.forEach loopListData@{ jsonApiData ->
                 //id
-                jsonApiData.javaClass.declaredFields?.forEach { field ->
+                jsonApiData.javaClass.declaredFields.forEach { field ->
                     if (field.name == resourceId.propertyName ||
                         field.name == resourceId.jsonPropertyName) {
                         field.isAccessible = true
                         val idValue = field.get(jsonApiData)
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach {field ->
-                            if (field.name == "id") {
-                                field.isAccessible = true
-                                field.set(jsonApiData.attributes, "$idValue")
+                        field.isAccessible = false
+                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
+                            if (jsonApiDataField.name == "id") {
+                                jsonApiDataField.isAccessible = true
+                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
+                                jsonApiDataField.isAccessible = false
                             }
                         }
                     }
@@ -259,9 +268,9 @@ class JsonApiMapper {
         }
     }
 
-    inline fun getRelationshipFromJsonApiData(input: KClass<*>): List<JARelationship> {
+    private fun getRelationshipFromJsonApiData(input: KClass<*>): List<JARelationship> {
 
-        var jaRelationship = arrayListOf<JARelationship>()
+        val jaRelationship = arrayListOf<JARelationship>()
 
         val fields = input.java.declaredFields
         fields.forEach { field ->
@@ -294,6 +303,7 @@ class JsonApiMapper {
                     idField?.isAccessible = true
                     val valueForId = include[kClassRelationshipId.jsonPropertyName]
                     idField?.set(relationshipObject, "$valueForId")
+                    idField?.isAccessible = false
                 }
             }
         }
