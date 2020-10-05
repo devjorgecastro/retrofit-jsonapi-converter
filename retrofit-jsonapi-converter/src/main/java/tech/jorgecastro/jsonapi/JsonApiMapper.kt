@@ -9,13 +9,12 @@ import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
 import kotlin.reflect.KClass
 
+data class JsonApiId(val jsonPropertyName: String?, val propertyName: String?)
+data class JARelationship(val field: Field, val jsonApiRelationshipAnnotation: JsonApiRelationship)
+
 class JsonApiMapper {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
-    data class JsonApiId(val jsonPropertyName: String?, val propertyName: String?)
-    data class JARelationship(val field: Field, val jsonApiRelationshipAnnotation: JsonApiRelationship)
-
 
     fun jsonApiMapToListObject(input: JsonApiResponse<*>, rawType: KClass<*>): Any? {
         val resourceId = getJsonApiId(rawType)
@@ -41,9 +40,9 @@ class JsonApiMapper {
                         val listRelationship = (relationship["data"]  as List< Map<*,*>>)
                         val listIncludeObjectsMaps = arrayListOf<Map<String, *>>()
 
-                        listRelationship.forEach { relationship ->
+                        listRelationship.forEach { itemRelationship ->
 
-                            val relationshipMap = (relationship as Map<*,*>)
+                            val relationshipMap = (itemRelationship as Map<*,*>)
                             if (relationshipMap.containsKey("id") && relationshipMap.containsKey("type")) {
 
                                 val type = relationshipMap["type"].toString()
