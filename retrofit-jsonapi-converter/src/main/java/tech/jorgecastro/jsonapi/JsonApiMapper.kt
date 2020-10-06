@@ -70,26 +70,18 @@ class JsonApiMapper {
 
                         //includeRelationship
                         run jsonApiDataLoop@ {
-                            jsonApiData.attributes?.let { dataAttributes ->
-                                dataAttributes.javaClass.declaredFields.forEach { field ->
-                                    val annotations = field.annotations
-                                    if (annotations.isNotEmpty()) {
-                                        annotations.forEach { annotation ->
-                                            if (annotation is JsonApiRelationship) {
-                                                val valueField = listIncludeObjectsMaps
-                                                    .filter { it.containsKey(annotation.jsonAttrName)}
-                                                    .flatMap { map ->
-                                                        val newList = arrayListOf<Any>()
-                                                        map[key]?.let {
-                                                            newList.add(it)
-                                                        }
-                                                        newList
-                                                    }
+                            val dataAttributes = jsonApiData.attributes ?: return@jsonApiDataLoop
+                            dataAttributes.javaClass.declaredFields.forEach { field ->
+                                field.annotations.forEach { annotation ->
+                                    if (annotation is JsonApiRelationship) {
+                                        val valueField = getValueForRelationship(
+                                            listIncludeObjectsMaps,
+                                            annotation,
+                                            key
+                                        )
 
-                                                field.setWithIgnorePrivateCase(dataAttributes, valueField)
-                                                return@jsonApiDataLoop
-                                            }
-                                        }
+                                        field.setWithIgnorePrivateCase(dataAttributes, valueField)
+                                        return@jsonApiDataLoop
                                     }
                                 }
                             }
@@ -173,26 +165,18 @@ class JsonApiMapper {
 
                         //includeRelationship
                         run jsonApiDataLoop@ {
-                            jsonApiData.attributes?.let { dataAttributes ->
-                                dataAttributes.javaClass.declaredFields.forEach { field ->
-                                    val annotations = field.annotations
-                                    if (annotations.isNotEmpty()) {
-                                        annotations.forEach { annotation ->
-                                            if (annotation is JsonApiRelationship) {
-                                                val valueField = listIncludeObjectsMaps
-                                                    .filter { it.containsKey(annotation.jsonAttrName)}
-                                                    .flatMap { map ->
-                                                        val newList = arrayListOf<Any>()
-                                                        map[key]?.let {
-                                                            newList.add(it)
-                                                        }
-                                                        newList
-                                                    }
+                            val dataAttributes = jsonApiData.attributes ?: return@jsonApiDataLoop
+                            dataAttributes.javaClass.declaredFields.forEach { field ->
+                                field.annotations.forEach { annotation ->
+                                    if (annotation is JsonApiRelationship) {
+                                        val valueField = getValueForRelationship(
+                                            listIncludeObjectsMaps,
+                                            annotation,
+                                            key
+                                        )
 
-                                                field.setWithIgnorePrivateCase(dataAttributes, valueField)
-                                                return@jsonApiDataLoop
-                                            }
-                                        }
+                                        field.setWithIgnorePrivateCase(dataAttributes, valueField)
+                                        return@jsonApiDataLoop
                                     }
                                 }
                             }
@@ -212,6 +196,22 @@ class JsonApiMapper {
             newList.add(it.attributes!!)
             newList
         }
+    }
+
+    private fun getValueForRelationship(
+        listIncludeObjectsMaps: ArrayList<Map<String, *>>,
+        annotation: JsonApiRelationship,
+        key: Any?
+    ): List<Any> {
+        return listIncludeObjectsMaps
+            .filter { it.containsKey(annotation.jsonAttrName) }
+            .flatMap { map ->
+                val newList = arrayListOf<Any>()
+                map[key]?.let {
+                    newList.add(it)
+                }
+                newList
+            }
     }
 
     /**
