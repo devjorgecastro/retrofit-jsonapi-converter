@@ -10,3 +10,9 @@ import java.lang.reflect.Field
 fun Any.jDeclaredFields(): Array<out Field> {
     return javaClass?.declaredFields
 }
+
+fun Field.setWithIgnorePrivateCase(obj: Any?, value: Any?) {
+    isAccessible = true
+    set(obj, value)
+    isAccessible = false
+}

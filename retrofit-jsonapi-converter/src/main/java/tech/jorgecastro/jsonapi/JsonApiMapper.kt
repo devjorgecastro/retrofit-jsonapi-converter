@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
 import tech.jorgecastro.jsonapi.commons.jDeclaredFields
+import tech.jorgecastro.jsonapi.commons.setWithIgnorePrivateCase
 import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
 import kotlin.reflect.KClass
@@ -85,9 +86,7 @@ class JsonApiMapper {
                                                         newList
                                                     }
 
-                                                field.isAccessible = true
-                                                field.set(dataAttributes, valueField)
-                                                field.isAccessible = false
+                                                field.setWithIgnorePrivateCase(dataAttributes, valueField)
                                                 return@jsonApiDataLoop
                                             }
                                         }
@@ -190,9 +189,7 @@ class JsonApiMapper {
                                                         newList
                                                     }
 
-                                                field.isAccessible = true
-                                                field.set(dataAttributes, valueField)
-                                                field.isAccessible = false
+                                                field.setWithIgnorePrivateCase(dataAttributes, valueField)
                                                 return@jsonApiDataLoop
                                             }
                                         }
@@ -240,9 +237,7 @@ class JsonApiMapper {
                 field.isAccessible = false
                 jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
                     if (jsonApiDataField.name == "id") {
-                        jsonApiDataField.isAccessible = true
-                        jsonApiDataField.set(jsonApiData.attributes, "$idValue")
-                        jsonApiDataField.isAccessible = false
+                        jsonApiDataField.setWithIgnorePrivateCase(jsonApiData.attributes, "$idValue")
                     }
                 }
             }
@@ -341,10 +336,8 @@ class JsonApiMapper {
 
 
                     relationshipObject?.jDeclaredFields()?.firstOrNull { it.name == "id" }?.run {
-                        isAccessible = true
                         val valueForId = include[kClassRelationshipId.jsonPropertyName]
-                        set(relationshipObject, "$valueForId")
-                        isAccessible = false
+                        setWithIgnorePrivateCase(relationshipObject, "$valueForId")
                     }
                 }
             }
