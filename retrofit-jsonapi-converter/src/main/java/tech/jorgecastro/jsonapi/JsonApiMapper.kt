@@ -16,7 +16,7 @@ class JsonApiMapper {
         val resourceId = getJsonApiId(rawType)
 
         /**
-         * Se verifican los atributos que tengan la anotación JsonApiRelationship
+         * The attributes that have the JsonApiRelationship annotation are obtained.
          */
         val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
@@ -24,9 +24,8 @@ class JsonApiMapper {
             input.data?.let {  jsonApiData ->
 
                 /**
-                 * Se recorren todas las relaciones del recurso
+                 * All resource relationships are iterated
                  */
-
 
                 val relationships = (jsonApiData.relationships as? Map<*,*>)
                 relationships?.keys?.forEach { key ->
@@ -44,7 +43,7 @@ class JsonApiMapper {
                                 val type = relationshipMap["type"].toString()
 
                                 /**
-                                 * Si existen coincidencias de la anotación JsonApiRelationship se obtienen los datos de include
+                                 * If there are matches of the JsonApiRelationship annotation, the include data is obtained.
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.jsonApiResourceName == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
@@ -88,21 +87,8 @@ class JsonApiMapper {
                     }
                 }
 
-                //id
-                jsonApiData.javaClass.declaredFields.forEach { field ->
-                    if (field.name == resourceId.propertyName) {
-                        field.isAccessible = true
-                        val idValue = field.get(jsonApiData)
-                        field.isAccessible = false
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
-                            if (jsonApiDataField.name == "id") {
-                                jsonApiDataField.isAccessible = true
-                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
-                                jsonApiDataField.isAccessible = false
-                            }
-                        }
-                    }
-                }
+
+                setIdForAllDataItem(jsonApiData, resourceId)
 
 
             }
@@ -113,12 +99,13 @@ class JsonApiMapper {
         return input.data?.attributes
     }
 
+
     fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
         val resourceId = getJsonApiId(rawType)
 
         /**
-         * Se verifican los atributos que tengan la anotación JsonApiRelationship
+         * The attributes that have the JsonApiRelationship annotation are obtained.
          */
         val jaRelationship = getRelationshipFromJsonApiData(rawType)
 
@@ -126,9 +113,8 @@ class JsonApiMapper {
             listData?.forEach loopListData@ {  jsonApiData ->
 
                 /**
-                 * Se recorren todas las relaciones del recurso
+                 * All resource relationships are iterated
                  */
-
 
                 val relationships = (jsonApiData.relationships as? Map<*,*>)
                 relationships?.keys?.forEach { key ->
@@ -155,7 +141,7 @@ class JsonApiMapper {
                                 val type = relationshipMap["type"].toString()
 
                                 /**
-                                 * Si existen coincidencias de la anotación JsonApiRelationship se obtienen los datos de include
+                                 * If there are matches of the JsonApiRelationship annotation, the include data is obtained.
                                  */
                                 val relationshipCoincidences = jaRelationship.filter { it.jsonApiRelationshipAnnotation.jsonApiResourceName == type }
                                 if (relationshipCoincidences.isNotEmpty()) {
@@ -199,29 +185,11 @@ class JsonApiMapper {
                     }
                 }
 
-                //id
-                jsonApiData.javaClass.declaredFields.forEach { field ->
-                    if (field.name == resourceId.propertyName ||
-                        field.name == resourceId.jsonPropertyName) {
-                        field.isAccessible = true
-                        val idValue = field.get(jsonApiData)
-                        field.isAccessible = false
-                        jsonApiData.attributes?.javaClass?.declaredFields?.forEach { jsonApiDataField ->
-                            if (jsonApiDataField.name == "id") {
-                                jsonApiDataField.isAccessible = true
-                                jsonApiDataField.set(jsonApiData.attributes, "$idValue")
-                                jsonApiDataField.isAccessible = false
-                            }
-                        }
-                    }
-                }
 
-
+                setIdForAllDataItem(jsonApiData, resourceId)
             }
         } ?: run {
-            listData?.forEach loopListData@{ jsonApiData ->
-                setDataId(jsonApiData, resourceId)
-            }
+            listData?.forEach loopListData@{ jsonApiData -> setDataId(jsonApiData, resourceId) }
         }
 
         return input.data?.flatMap {
@@ -238,6 +206,7 @@ class JsonApiMapper {
      * @param resourceId containt info about property of class
      * selected as ID ([JsonApiId.jsonPropertyName] / [JsonApiId.propertyName])
      *
+     * @see JsonApiData
      * @see JsonApiId
      */
     private fun setDataId(
@@ -257,6 +226,46 @@ class JsonApiMapper {
                         jsonApiDataField.set(jsonApiData.attributes, "$idValue")
                         jsonApiDataField.isAccessible = false
                     }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Sets the id for all Objects of class that represent attributes payload
+     *
+     * @param jsonApiData is the information received from the service
+     * @param resourceId containt info about property of class
+     * selected as ID ([JsonApiId.jsonPropertyName] / [JsonApiId.propertyName]).
+     * In other words it is the id attribute of the object where I want to map the response
+     *
+     * @see JsonApiData
+     * @see JsonApiId
+     */
+    private fun setIdForAllDataItem(
+        jsonApiData: JsonApiData<out Any?>,
+        resourceId: JsonApiId
+    ) {
+        jsonApiData.javaClass.declaredFields.forEach { field ->
+
+            /**
+             * It is verified by propertyName and jsonPropertyName in case the attribute
+             * does not have the annotation @Json(name = "id")
+             */
+            if (field.name == resourceId.propertyName ||
+                field.name == resourceId.jsonPropertyName) {
+                field.isAccessible = true
+                val idValue = field.get(jsonApiData)
+                field.isAccessible = false
+
+                val jsonApiDataField = jsonApiData.attributes?.javaClass?.declaredFields
+                    ?.first { it.name == "id" }
+
+                jsonApiDataField?.run {
+                    isAccessible = true
+                    set(jsonApiData.attributes, "$idValue")
+                    isAccessible = false
                 }
             }
         }
