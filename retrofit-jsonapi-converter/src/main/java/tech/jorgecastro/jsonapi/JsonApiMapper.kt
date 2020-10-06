@@ -14,7 +14,7 @@ class JsonApiMapper {
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
     fun jsonApiMapToListObject(input: JsonApiResponse<*>, rawType: KClass<*>): Any? {
-        val resourceId = getJsonApiId(rawType)
+        val resourceId = getJsonApiIdFrom(rawType)
 
         /**
          * The attributes that have the JsonApiRelationship annotation are obtained.
@@ -110,7 +110,7 @@ class JsonApiMapper {
 
     fun jsonApiMapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
         val listData = input.data
-        val resourceId = getJsonApiId(rawType)
+        val resourceId = getJsonApiIdFrom(rawType)
 
         /**
          * The attributes that have the JsonApiRelationship annotation are obtained.
@@ -330,7 +330,7 @@ class JsonApiMapper {
 
         kClassRelationship?.let {
 
-            val kClassRelationshipId = getJsonApiId(kClassRelationship)
+            val kClassRelationshipId = getJsonApiIdFrom(kClassRelationship)
 
             includes.forEach { include ->
                 val includeMap = (include as Map<*,*>)
@@ -394,7 +394,7 @@ class JsonApiMapper {
         return kClassResponse
     }
 
-    private fun getJsonApiId(classRef: KClass<*>): JsonApiId {
+    private fun getJsonApiIdFrom(classRef: KClass<*>): JsonApiId {
         var jsonPropertyName: String? = null
         var propertyName = ""
         var fieldName: String? = null
