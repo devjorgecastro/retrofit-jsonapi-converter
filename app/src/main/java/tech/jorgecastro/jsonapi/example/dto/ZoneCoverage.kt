@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 import tech.jorgecastro.jsonapi.JsonApiRelationship
 import tech.jorgecastro.jsonapi.JsonApiResource
 
-
 @JsonApiResource(name = "zone_coverage")
 data class ZoneCoverage(
     @field:Json(name = "id") var id: String = "",

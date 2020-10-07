@@ -171,7 +171,3 @@ class JsonApiConverterFactory : Converter.Factory() {
         }
     }
 }
-
-fun<T: Any> T.getClass(): KClass<T> {
-    return javaClass.kotlin
-}

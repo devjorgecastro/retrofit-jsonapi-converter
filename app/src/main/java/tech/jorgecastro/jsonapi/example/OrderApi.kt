@@ -72,4 +72,3 @@ data class Product(
     val volume: Int = 0,
     val weight: Int = 0
 )
-
