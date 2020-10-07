@@ -38,8 +38,9 @@ class MainActivity : AppCompatActivity() {
             //getErrorDataWithFlow()
             //testOrderApiSingleRxJava()
             //testGetDataWithFlow()
-            testGetOrderDetailWithFlow()
+            //testGetOrderDetailWithFlow()
             //testGetArticlesWithRxJava()
+            testGetArticlesWithCoroutine()
         }
     }
 
@@ -228,6 +229,15 @@ class MainActivity : AppCompatActivity() {
         getRetrofitInstance()
             .create(OrderApi::class.java)
             .getOrderDetailWithFlow()
+            .collect {
+                val data = it
+            }
+    }
+
+    private suspend fun testGetArticlesWithCoroutine(){
+        getRetrofitInstance()
+            .create(ArticlesApi::class.java)
+            .getArticlesWithCoroutine()
             .collect {
                 val data = it
             }
