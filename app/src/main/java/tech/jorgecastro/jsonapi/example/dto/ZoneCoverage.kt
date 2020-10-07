@@ -1,4 +1,4 @@
-package tech.jorgecastro.jsonapi.dto
+package tech.jorgecastro.jsonapi.example.dto
 
 import com.squareup.moshi.Json
 import tech.jorgecastro.jsonapi.JsonApiRelationship

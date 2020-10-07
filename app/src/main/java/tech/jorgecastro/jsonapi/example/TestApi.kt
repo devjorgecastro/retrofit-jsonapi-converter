@@ -5,8 +5,8 @@ import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import tech.jorgecastro.jsonapi.JsonApiMethod
-import tech.jorgecastro.jsonapi.dto.Article
-import tech.jorgecastro.jsonapi.dto.ZoneCoverage
+import tech.jorgecastro.jsonapi.example.dto.Article
+import tech.jorgecastro.jsonapi.example.dto.ZoneCoverage
 
 interface TestApi {
 
