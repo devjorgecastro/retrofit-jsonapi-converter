@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 import kotlin.system.measureTimeMillis
 
@@ -285,6 +286,7 @@ class MainActivity : AppCompatActivity() {
                 .client(httpClient)
                 .addConverterFactory(JsonApiConverterFactory())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))/*Add for catch HttpException*/
+                .addCallAdapterFactory(JsonApiCallAdapterFactory.create()) /*Add for catch HttpException*/
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
