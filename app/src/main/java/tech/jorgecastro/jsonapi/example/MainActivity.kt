@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 import kotlin.system.measureTimeMillis
 
@@ -34,13 +33,51 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         GlobalScope.launch {
-            testCountryData()
+            //getErrorDataWithRxJava()
+            //getErrorDataWithFlow()
+            //testOrderApiSingleRxJava()
+            //testGetDataWithFlow()
+            //testGetOrderDetailWithFlow()
+
+
+            //testGetArticlesWithRxJava()
+
+            //testGetArticlesWithCoroutine()
+
+
+
+            compositeDisposable.add(
+                getRetrofitInstance()
+                    .create(TestApi::class.java)
+                    .test()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        val response = it
+                    }, {
+                        val err = it
+                    })
+            )
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+    }
+
+    private fun testGetArticlesWithRxJava() {
+        compositeDisposable.add(
+            getRetrofitInstance()
+                .create(TestApi::class.java)
+                .getArticlesWithMultipleAuthors()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    val response = it
+                }, {
+                    val err = it
+                })
+        )
     }
 
     private suspend fun testOneData() {
@@ -81,11 +118,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun testApiData2(){
+    private suspend fun testGetDataWithFlow(){
         withContext(Dispatchers.IO) {
             getRetrofitInstance()
                 .create(TestApi::class.java)
-                .getData2()
+                .getDataWithFlow()
                 .collect {
                     val result = it
                 }
@@ -141,11 +178,11 @@ class MainActivity : AppCompatActivity() {
         Log.d("Total", "$time")
     }
 
-    private fun testApiDataWithObservableErrors() {
+    private fun getErrorDataWithRxJava() {
         compositeDisposable.add(
             getRetrofitInstance()
                 .create(TestApi::class.java)
-                .getDataWithObservableError()
+                .getErrorDataWithRxJava()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -158,12 +195,14 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private suspend fun testApiDataWithError1(){
+    private suspend fun getErrorDataWithFlow(){
         try {
             val response = getRetrofitInstance()
                 .create(TestApi::class.java)
-                .getDataWithError1()
-            val cityName = response.first().cityName
+                .getErrorDataWithFlow()
+                .collect {
+                    val cityName = it.first().cityName
+                }
         }
         catch (e: JsonApiResponseException) {
             val errorData = e.data
@@ -191,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         compositeDisposable.add(
             getRetrofitInstance()
                 .create(OrderApi::class.java)
-                .getOrderDetail()
+                .getOrderDetailWithRxJava()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -200,6 +239,27 @@ class MainActivity : AppCompatActivity() {
                     val err = it
                 })
         )
+    }
+
+    private suspend fun testGetOrderDetailWithFlow(){
+        getRetrofitInstance()
+            .create(OrderApi::class.java)
+            .getOrderDetailWithFlow()
+            .collect {
+                val data = it
+            }
+    }
+
+    private suspend fun testGetArticlesWithCoroutine(){
+        getRetrofitInstance()
+            .create(ArticlesApi::class.java)
+            .getArticlesWithCoroutine()
+            .catch {
+                val err = it
+            }
+            .collect {
+                val data = it
+            }
     }
 
     private fun getRetrofitInstance(): Retrofit {
@@ -224,8 +284,7 @@ class MainActivity : AppCompatActivity() {
                 .baseUrl(baseUrl)
                 .client(httpClient)
                 .addConverterFactory(JsonApiConverterFactory())
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .addCallAdapterFactory(JsonApiCallAdapterFactory.create()) /*Add for catch HttpException*/
+                .addConverterFactory(MoshiConverterFactory.create(moshi))/*Add for catch HttpException*/
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }

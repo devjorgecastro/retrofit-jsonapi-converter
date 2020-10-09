@@ -1,5 +1,7 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
+[website](https://devjorgecastro.github.io/retrofit-jsonapi-converter/)
+
 [ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-beta1) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-beta1/link)
 
 Written purely in kotlin :heart_eyes::heart:
@@ -152,7 +154,7 @@ data class Article(
     val body: String = "",
     @Json(name = "created_date") val createdDate: String = "",
     @Json(name = "updated_date") val updatedDate: String = "",
-    @JsonApiRelationship(name = "people", relationship = "author")
+    @JsonApiRelationship(jsonApiResourceName = "people", jsonAttrName = "author")
     var authors: List<People>? = listOf() // name is JsonApiResource of people
 )
 ```

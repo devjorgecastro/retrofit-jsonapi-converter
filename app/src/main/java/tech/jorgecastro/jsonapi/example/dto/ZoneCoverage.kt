@@ -1,11 +1,10 @@
-package tech.jorgecastro.jsonapi.dto
+package tech.jorgecastro.jsonapi.example.dto
 
 import com.squareup.moshi.Json
 import tech.jorgecastro.jsonapi.JsonApiRelationship
 import tech.jorgecastro.jsonapi.JsonApiResource
 
-
-@JsonApiResource(name = "zone_coverage")
+@JsonApiResource(type = "zone_coverage")
 data class ZoneCoverage(
     @field:Json(name = "id") var id: String = "",
     @Json(name = "country_name") var countryName: String,
@@ -13,7 +12,7 @@ data class ZoneCoverage(
 )
 
 
-@JsonApiResource(name = "people")
+@JsonApiResource(type = "people")
 data class People(
     @field:Json(name = "id") var id: String = "",
     var name: String = "",
@@ -21,12 +20,14 @@ data class People(
     var gender: String = ""
 )
 
-@JsonApiResource(name = "articles")
+@JsonApiResource(type = "articles")
 data class Article(
     @field:Json(name = "id") var id: String = "",
     var title: String = "",
     var body: String = "",
     var created: String = "",
     var updated: String = "",
-    @JsonApiRelationship(name = "people", relationship = "author") var authors: List<People>? = listOf()
+
+    @JsonApiRelationship(jsonApiResourceName = "people", jsonAttrName = "author")
+    var authors: List<People>? = listOf()
 )

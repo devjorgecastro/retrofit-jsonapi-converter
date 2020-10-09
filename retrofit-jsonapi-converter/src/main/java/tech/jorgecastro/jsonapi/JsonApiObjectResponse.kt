@@ -5,6 +5,9 @@ class Link {
     var self: String = ""
 }
 
+/**
+ * @property attributes is the class to which you want to map the information. e.g. Articles
+ */
 class JsonApiData<T> {
     var id: String = ""
     var type: String = ""
@@ -14,12 +17,12 @@ class JsonApiData<T> {
 }
 
 
-class JsonApiResponse<T> {
+open class JsonApiResponse(var included: List<Any>? = null)
+
+class JsonApiObjectResponse<T>: JsonApiResponse() {
     var data: JsonApiData<T>? = null
-    var included: List<Any>? = null
 }
 
-class JsonApiListResponse<T> {
+class JsonApiListResponse<T>: JsonApiResponse() {
     var data: List<JsonApiData<T>>? = null
-    var included: List<Any>? = null
 }

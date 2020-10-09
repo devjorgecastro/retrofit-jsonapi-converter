@@ -12,7 +12,7 @@ interface CountryApi {
     suspend fun getCountryCodes(): Flow<List<CountryCode>>
 }
 
-@JsonApiResource(name = "country")
+@JsonApiResource(type = "country")
 data class CountryCode(
     @field:Json(name = "id") var id: String = "",
     @Json(name = "code") var code: Int,

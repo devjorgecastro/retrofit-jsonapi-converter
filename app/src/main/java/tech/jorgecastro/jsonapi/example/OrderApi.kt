@@ -2,17 +2,22 @@ package tech.jorgecastro.jsonapi.example
 
 import com.squareup.moshi.Json
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import tech.jorgecastro.jsonapi.JsonApiRelationship
 import tech.jorgecastro.jsonapi.JsonApiResource
 
 interface OrderApi {
     @GET("v2/5e8246152f00000d002fb9e9")
-    fun getOrderDetail(): Single<OrderDetail>
+    fun getOrderDetailWithRxJava(): Single<OrderDetail>
+
+
+    @GET("v2/5e8246152f00000d002fb9e9")
+    suspend fun getOrderDetailWithFlow(): Flow<OrderDetail>
 }
 
 
-@JsonApiResource(name = "orderDetail")
+@JsonApiResource(type = "orderDetail")
 data class OrderDetail(
     @field:Json(name = "id") val id: String = "",
     val reference: String = "",
@@ -36,7 +41,7 @@ data class OrderDetail(
     @Json(name = "is_express") val isExpress: Boolean = false,
     @Json(name = "credit_card_info") val creditCardInfo: String? = null,
     @Json(name = "hash_code") val hashCode: String = "",
-    @JsonApiRelationship(name = "products", relationship = "products") var products: List<Product>? = listOf() // name is JsonApiResource of Product
+    @JsonApiRelationship(jsonApiResourceName = "products", jsonAttrName = "products") var products: List<Product>? = listOf() // name is JsonApiResource of Product
 )
 
 data class OrderDate(
@@ -51,7 +56,7 @@ data class DeliveryDate(
     val timezone: String = ""
 )
 
-@JsonApiResource(name = "products")
+@JsonApiResource(type = "products")
 data class Product(
     @Json(name = "id") val id: String = "",
     val slug: String = "",
@@ -65,6 +70,6 @@ data class Product(
     val sponsored: Boolean = false,
     val pum: List<String> = listOf(),
     val volume: Int = 0,
-    val weight: Int = 0
+    val weight: Int = 0,
+    val status: String
 )
-
