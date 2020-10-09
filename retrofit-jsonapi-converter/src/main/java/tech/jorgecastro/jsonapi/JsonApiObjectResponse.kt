@@ -17,12 +17,12 @@ class JsonApiData<T> {
 }
 
 
-class JsonApiResponse<T> {
+open class JsonApiResponse(var included: List<Any>? = null)
+
+class JsonApiObjectResponse<T>: JsonApiResponse() {
     var data: JsonApiData<T>? = null
-    var included: List<Any>? = null
 }
 
-class JsonApiListResponse<T> {
+class JsonApiListResponse<T>: JsonApiResponse() {
     var data: List<JsonApiData<T>>? = null
-    var included: List<Any>? = null
 }

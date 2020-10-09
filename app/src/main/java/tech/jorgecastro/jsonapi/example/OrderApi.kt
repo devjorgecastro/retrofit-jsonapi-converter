@@ -17,7 +17,7 @@ interface OrderApi {
 }
 
 
-@JsonApiResource(name = "orderDetail")
+@JsonApiResource(type = "orderDetail")
 data class OrderDetail(
     @field:Json(name = "id") val id: String = "",
     val reference: String = "",
@@ -56,7 +56,7 @@ data class DeliveryDate(
     val timezone: String = ""
 )
 
-@JsonApiResource(name = "products")
+@JsonApiResource(type = "products")
 data class Product(
     @Json(name = "id") val id: String = "",
     val slug: String = "",
@@ -70,5 +70,6 @@ data class Product(
     val sponsored: Boolean = false,
     val pum: List<String> = listOf(),
     val volume: Int = 0,
-    val weight: Int = 0
+    val weight: Int = 0,
+    val status: String
 )

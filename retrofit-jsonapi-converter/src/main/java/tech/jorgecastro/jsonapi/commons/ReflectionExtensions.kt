@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * @return array of [Field]
  */
 fun Any.jDeclaredFields(): Array<out Field> {
-    return javaClass?.declaredFields
+    return javaClass.declaredFields
 }
 
 fun Field.setWithIgnorePrivateCase(obj: Any?, value: Any?) {

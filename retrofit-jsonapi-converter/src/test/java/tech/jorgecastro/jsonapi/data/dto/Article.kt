@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import tech.jorgecastro.jsonapi.JsonApiRelationship
 import tech.jorgecastro.jsonapi.JsonApiResource
 
-@JsonApiResource(name = "people")
+@JsonApiResource(type = "people")
 data class People(
     @field:Json(name = "id") var id: String = "",
     var name: String = "",
@@ -12,7 +12,7 @@ data class People(
     var gender: String = ""
 )
 
-@JsonApiResource(name = "articles")
+@JsonApiResource(type = "articles")
 data class Article(
     @field:Json(name = "id") var id: String = "",
     var title: String = "",

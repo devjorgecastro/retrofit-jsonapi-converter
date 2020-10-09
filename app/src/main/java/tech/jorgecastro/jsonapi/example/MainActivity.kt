@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 import kotlin.system.measureTimeMillis
 
@@ -39,8 +38,25 @@ class MainActivity : AppCompatActivity() {
             //testOrderApiSingleRxJava()
             //testGetDataWithFlow()
             //testGetOrderDetailWithFlow()
+
+
             //testGetArticlesWithRxJava()
-            testGetArticlesWithCoroutine()
+
+            //testGetArticlesWithCoroutine()
+
+
+
+            compositeDisposable.add(
+                getRetrofitInstance()
+                    .create(TestApi::class.java)
+                    .test()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        val response = it
+                    }, {
+                        val err = it
+                    })
+            )
         }
     }
 
@@ -238,6 +254,9 @@ class MainActivity : AppCompatActivity() {
         getRetrofitInstance()
             .create(ArticlesApi::class.java)
             .getArticlesWithCoroutine()
+            .catch {
+                val err = it
+            }
             .collect {
                 val data = it
             }
@@ -265,8 +284,7 @@ class MainActivity : AppCompatActivity() {
                 .baseUrl(baseUrl)
                 .client(httpClient)
                 .addConverterFactory(JsonApiConverterFactory())
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .addCallAdapterFactory(JsonApiCallAdapterFactory.create()) /*Add for catch HttpException*/
+                .addConverterFactory(MoshiConverterFactory.create(moshi))/*Add for catch HttpException*/
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }

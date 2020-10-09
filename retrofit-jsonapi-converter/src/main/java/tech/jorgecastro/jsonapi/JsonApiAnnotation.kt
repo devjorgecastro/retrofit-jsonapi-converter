@@ -13,7 +13,7 @@ annotation class JsonApiMethod
 
 @Target(AnnotationTarget.CLASS)
 @Retention
-annotation class JsonApiResource(val name: String)
+annotation class JsonApiResource(val type: String)
 
 @Target(AnnotationTarget.FIELD)
 @Retention
