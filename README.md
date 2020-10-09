@@ -2,7 +2,7 @@
 
 [website](https://devjorgecastro.github.io/retrofit-jsonapi-converter/)
 
-[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-beta1) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-beta1/link)
+[ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-beta2) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-beta2/link)
 
 Written purely in kotlin :heart_eyes::heart:
 
@@ -139,7 +139,7 @@ interface TestApi {
 ### Setting the response object
 ```kotlin
 
-@JsonApiResource(name = "people")
+@JsonApiResource(type = "people")
 data class People(
     @field:Json(name = "id") var id: String = "", // required
     var name: String = "",
@@ -147,7 +147,7 @@ data class People(
     var gender: String = ""
 )
 
-@JsonApiResource(name = "article")
+@JsonApiResource(type = "article")
 data class Article(
     @field:Json(name = "id") val id: String = "", // required
     val title: String = "",
