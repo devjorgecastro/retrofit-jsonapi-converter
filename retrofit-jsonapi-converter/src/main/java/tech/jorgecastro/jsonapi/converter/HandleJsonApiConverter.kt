@@ -19,8 +19,9 @@ class HandleJsonApiConverter {
             )
         }
         catch (e: JsonDataException) {
+            val errorMessage = e.message ?: "Unsupported class for conversion"
             throw JsonUnsupportedClass(
-                "Unsupported class for conversion",
+                errorMessage,
                 e
             )
         }
