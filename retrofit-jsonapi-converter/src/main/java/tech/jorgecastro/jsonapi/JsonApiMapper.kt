@@ -4,6 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
+import tech.jorgecastro.jsonapi.commons.setListWithIgnorePrivateCase
 import tech.jorgecastro.jsonapi.commons.jDeclaredFields
 import tech.jorgecastro.jsonapi.commons.setWithIgnorePrivateCase
 import java.lang.IllegalArgumentException
@@ -146,15 +147,24 @@ class JsonApiMapper {
         annotation: JsonApiRelationship,
         key: Any?
     ): Any? {
-        return listIncludeObjectsMaps
+        val response = listIncludeObjectsMaps
             .filter { it.containsKey(annotation.jsonApiResourceName) }
             .flatMap { map ->
                 val newList = arrayListOf<Any>()
                 map[key]?.let {
                     newList.add(it)
                 }
+
                 newList
             }
+
+
+        return if (response.count() == 1) {
+            response.first()
+        }
+        else {
+            response
+        }
     }
 
     private fun updateRelationshipInAttrClass(
@@ -181,18 +191,13 @@ class JsonApiMapper {
 
 
                         if (field.type == List::class.java
-                            && valueField is ArrayList<*>) {
-                            field.setWithIgnorePrivateCase(dataAttributes, valueField)
-                        }
-                        else if (field.type != List::class.java
-                            && valueField is ArrayList<*>) {
-                            field.setWithIgnorePrivateCase(dataAttributes, valueField.firstOrNull())
+                            && valueField !is ArrayList<*>) {
+                            field.setListWithIgnorePrivateCase(dataAttributes, valueField)
                         }
                         else {
                             field.setWithIgnorePrivateCase(dataAttributes, valueField)
                         }
                         return@jsonApiDataLoop
-
                     }
                 }
 

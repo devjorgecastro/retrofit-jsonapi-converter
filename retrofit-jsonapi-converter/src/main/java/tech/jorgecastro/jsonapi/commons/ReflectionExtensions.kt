@@ -18,6 +18,21 @@ fun Field.setWithIgnorePrivateCase(obj: Any?, value: Any?) {
     isAccessible = false
 }
 
+fun Field.setListWithIgnorePrivateCase(obj: Any?, value: Any?) {
+    isAccessible = true
+    value?.let {
+        when (value) {
+            is Collection<*> -> {
+                set(obj, value)
+            }
+            else -> {
+                set(obj, listOf(value))
+            }
+        }
+    }
+    isAccessible = false
+}
+
 fun<T: Any> T.getClass(): KClass<T> {
     return javaClass.kotlin
 }
