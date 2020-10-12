@@ -12,6 +12,11 @@ import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
 import kotlin.reflect.KClass
 
+/**
+ * Json api mapper: Class for map jsonapi response to simple object(As restful)
+ *
+ * @constructor Create empty Json api mapper
+ */
 class JsonApiMapper {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
