@@ -142,14 +142,12 @@ class JsonApiMapper {
             val relationship = (relationships[key] as Map<*, *>)
             if (relationship.containsKey("data")) {
 
-
                 val relationshipData = relationship["data"]
                 val listRelationship = if (relationshipData is ArrayList<*>) {
                     relationshipData
                 } else {
                     listOf((relationshipData as Map<*, *>))
                 }
-
 
                 val listIncludeObjectsMaps = arrayListOf<Map<String, *>>()
 
@@ -168,7 +166,8 @@ class JsonApiMapper {
                         }
 
                         if (relationshipCoincidences.isNotEmpty()) {
-                            val kClassRelationship = getRawTypeRelationship(outputObjectRawType, type)
+                            val kClassRelationship =
+                                getRawTypeRelationship(outputObjectRawType, type)
 
                             val includeRelationship = getObjectForIncludePayload(
                                 relationshipMap["id"].toString(),
@@ -193,16 +192,24 @@ class JsonApiMapper {
         setIdForAllDataItem(jsonApiData, resourceId)
     }
 
+    /**
+     * Get the values for a relation determined by the [type] parameter
+     *
+     * @param listIncludeObjectsMaps all data in the included payload.
+     * @param annotation containt metadata of object type.
+     * @param type is the type of return objects.
+     * @return object or list with type mark by key param.
+     */
     private fun getValueForRelationship(
         listIncludeObjectsMaps: ArrayList<Map<String, *>>,
         annotation: JsonApiRelationship,
-        key: Any?
+        type: Any?
     ): Any? {
         val response = listIncludeObjectsMaps
             .filter { it.containsKey(annotation.jsonApiResourceName) }
             .flatMap { map ->
                 val newList = arrayListOf<Any>()
-                map[key]?.let {
+                map[type]?.let {
                     newList.add(it)
                 }
 
@@ -217,36 +224,42 @@ class JsonApiMapper {
         }
     }
 
+    /**
+     * Update the values of the relations of the expected object.
+     *
+     * @param jsonApiData is the data payload in JsonApi response.
+     * @param listIncludeObjectsMaps all data in the included payload.
+     * @param typeValue is the type of relationship class with which the value will be updated.
+     */
     private fun updateRelationshipInAttrClass(
         jsonApiData: JsonApiData<out Any?>,
         listIncludeObjectsMaps: ArrayList<Map<String, *>>,
         typeValue: Any?
     ) {
         run jsonApiDataLoop@{
-            val dataAttributes = jsonApiData.attributes ?: return@jsonApiDataLoop
+            val expectedObject = jsonApiData.attributes ?: return@jsonApiDataLoop
 
-            dataAttributes.javaClass.declaredFields.forEach { field ->
+            expectedObject.javaClass.declaredFields.forEach { field ->
 
-
+                //Iterate all annotations for each attribute of the class
                 field.annotations.forEach { annotation ->
                     if (annotation is JsonApiRelationship
                         && annotation.jsonApiResourceName == typeValue
                     ) {
 
-
+                        //Value for the relation
                         val valueField = getValueForRelationship(
                             listIncludeObjectsMaps,
                             annotation,
                             typeValue
                         )
 
-
                         if (field.type == List::class.java
                             && valueField !is ArrayList<*>
                         ) {
-                            field.setListWithIgnorePrivateCase(dataAttributes, valueField)
+                            field.setListWithIgnorePrivateCase(expectedObject, valueField)
                         } else {
-                            field.setWithIgnorePrivateCase(dataAttributes, valueField)
+                            field.setWithIgnorePrivateCase(expectedObject, valueField)
                         }
                         return@jsonApiDataLoop
                     }
@@ -396,24 +409,26 @@ class JsonApiMapper {
     }
 
     /**
-     * Función para obtener el RawType de una relación a través del nombre especificado
-     * en el atributo name de JsonApiRelationship
+     * Function to obtain the RawType of a relation through the name specified
+     * in the name attribute of JsonApiRelationship
+     *
+     * @param mainRawType is [KClass] of expected object.
+     * @param relationship is the type of relationship you want to find.
+     * @return returns an [KClass] specified by the [relationship] parameter.
      */
-    fun getRawTypeRelationship(mainRawType: KClass<*>, relationship: String): KClass<*>? {
+    private fun getRawTypeRelationship(mainRawType: KClass<*>, relationship: String): KClass<*>? {
 
         var kClassResponse: KClass<*>? = null
 
         /**
-         * Obtenemos todas las relaciones por cada uno de los campos y luego
-         * verificamos que el argumento relationship sea igual a los nombres del
-         * atributo name de JsonApiRelationship
+         * All the relationships are obtained for each of the fields and then it is verified
+         * that the relationship argument is equal to the [JsonApiRelationship.jsonApiResourceName]
+         * of the JsonApiRelationship attribute.
          */
         run loop@{
             mainRawType.java.declaredFields.forEach { field ->
 
-                /**
-                 * Se obtienen todas las anotaciones del tipo JsonApiRelationship
-                 */
+                //All annotations of type JsonApiRelationship are obtained
                 val jsonApiRelationshipFiltered =
                     field.annotations.filterIsInstance<JsonApiRelationship>()
                 jsonApiRelationshipFiltered.forEach { jsonapiRelationship ->
