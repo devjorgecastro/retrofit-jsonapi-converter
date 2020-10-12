@@ -14,7 +14,7 @@ import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 class JsonApiRetrofitCallAdapter<T>(val call: Call<T>): Call<T> {
     @Throws(Exception::class)
     override fun enqueue(callback: Callback<T>) {
-        call.enqueue(object: Callback<T> {
+        call.enqueue(object : Callback<T> {
             override fun onFailure(call: Call<T>, t: Throwable) {
                 callback.onFailure(call, t)
             }

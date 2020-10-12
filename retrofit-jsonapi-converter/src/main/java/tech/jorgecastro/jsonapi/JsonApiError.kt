@@ -1,6 +1,5 @@
 package tech.jorgecastro.jsonapi
 
-
 /**
  * @property jsonapi provides info about the json api response
  * @property errors is the array with the errors of response

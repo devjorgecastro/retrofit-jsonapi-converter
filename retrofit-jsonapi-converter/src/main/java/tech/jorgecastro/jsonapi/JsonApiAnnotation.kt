@@ -6,7 +6,6 @@ package tech.jorgecastro.jsonapi
 @Target(AnnotationTarget.CLASS)
 annotation class UpcomingChanges(val description: String)
 
-
 @Target(AnnotationTarget.FUNCTION)
 @Retention
 annotation class JsonApiMethod
@@ -18,8 +17,6 @@ annotation class JsonApiResource(val type: String)
 @Target(AnnotationTarget.FIELD)
 @Retention
 annotation class JsonApiField(val name: String)
-
-
 
 /**
  * A class attribute with this annotation linked to the relationship of the jsonApi response.

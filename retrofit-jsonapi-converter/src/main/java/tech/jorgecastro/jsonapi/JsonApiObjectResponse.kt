@@ -19,10 +19,10 @@ class JsonApiData<T> {
 
 open class JsonApiResponse(var included: List<Any>? = null)
 
-class JsonApiObjectResponse<T>: JsonApiResponse() {
+class JsonApiObjectResponse<T> : JsonApiResponse() {
     var data: JsonApiData<T>? = null
 }
 
-class JsonApiListResponse<T>: JsonApiResponse() {
+class JsonApiListResponse<T> : JsonApiResponse() {
     var data: List<JsonApiData<T>>? = null
 }

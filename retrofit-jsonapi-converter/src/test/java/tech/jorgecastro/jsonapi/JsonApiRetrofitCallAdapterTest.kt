@@ -24,7 +24,6 @@ class JsonApiRetrofitCallAdapterTest {
     @Mock
     private lateinit var callReturnMock: Call<Any>
 
-
     private lateinit var jsonApiRetrofitCallAdapter: JsonApiRetrofitCallAdapter<Any>
 
     @Before

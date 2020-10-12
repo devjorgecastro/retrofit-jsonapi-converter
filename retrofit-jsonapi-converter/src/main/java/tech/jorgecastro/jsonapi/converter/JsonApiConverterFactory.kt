@@ -40,8 +40,7 @@ class JsonApiConverterFactory : Converter.Factory() {
                 if (type is ParameterizedType) {
                     val parameterType = getParameterUpperBound(0, type)
                     getFlowJsonConverter(parameterType) as Converter<ResponseBody, Class<*>>
-                }
-                else {
+                } else {
                     getFlowJsonConverter(type) as Converter<ResponseBody, Class<*>>
                 }
             }
@@ -54,10 +53,11 @@ class JsonApiConverterFactory : Converter.Factory() {
         var objectClass: Class<*>
         if (type is ParameterizedType) {
             var newType = getParameterUpperBound(0, type)
-            while (newType is ParameterizedType) { newType = getParameterUpperBound(0, newType) }
+            while (newType is ParameterizedType) {
+                newType = getParameterUpperBound(0, newType)
+            }
             objectClass = Class.forName(getRawType(newType).name)
-        }
-        else {
+        } else {
             objectClass = Class.forName(getRawType(type).name)
         }
 
@@ -97,14 +97,17 @@ class JsonApiConverterFactory : Converter.Factory() {
     }
 
 
-    internal class JsonConverter(val classReference: Class<*>, val classReferenceList: Class<*>? = null): Converter<ResponseBody?, Any?> {
+    internal class JsonConverter(
+        val classReference: Class<*>,
+        val classReferenceList: Class<*>? = null
+    ) : Converter<ResponseBody?, Any?> {
         @Throws(Exception::class)
         override fun convert(responseBody: ResponseBody?): Any? {
-           return HandleJsonApiConverter().exec {
-               if (classReferenceList == null)
-                   getJsonApiResponseObject(responseBody, classReference)
-               else
-                   getJsonApiResponseList(responseBody, classReference)
+            return HandleJsonApiConverter().exec {
+                if (classReferenceList == null)
+                    getJsonApiResponseObject(responseBody, classReference)
+                else
+                    getJsonApiResponseList(responseBody, classReference)
             }
         }
 
@@ -117,19 +120,21 @@ class JsonApiConverterFactory : Converter.Factory() {
         }
     }
 
-
-    internal class FlowJsonConverter(val classReference: Class<*>, val classReferenceList: Class<*>? = null): Converter<ResponseBody?, Flow<*>?> {
+    internal class FlowJsonConverter(
+        val classReference: Class<*>,
+        val classReferenceList: Class<*>? = null
+    ) : Converter<ResponseBody?, Flow<*>?> {
         @Throws(IOException::class)
         override fun convert(responseBody: ResponseBody?): Flow<*> {
             return flow<Any> {
                 emit(
                     suspendCancellableCoroutine { cancellableContinuation ->
                         if (classReferenceList == null) {
-                            val response = getJsonApiResponseObject(responseBody,classReference)
+                            val response = getJsonApiResponseObject(responseBody, classReference)
                             cancellableContinuation.resume(response as Any)
-                        }
-                        else {
-                            val jsonApiResponseList = getJsonApiResponseList(responseBody, classReference)
+                        } else {
+                            val jsonApiResponseList =
+                                getJsonApiResponseList(responseBody, classReference)
                             jsonApiResponseList?.let {
                                 cancellableContinuation.resume(it)
                             }
@@ -149,21 +154,29 @@ class JsonApiConverterFactory : Converter.Factory() {
     }
 
 
-
     companion object {
         fun getJsonApiResponseObject(responseBody: ResponseBody?, classReference: Class<*>): Any? {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             val jsonObject = JSONObject(responseBody?.string())
-            val parameterizedType = Types.newParameterizedType(JsonApiObjectResponse::class.java, classReference)
-            val jsonAdapter: JsonAdapter<JsonApiObjectResponse<*>> = moshi.adapter(parameterizedType)
+            val parameterizedType =
+                Types.newParameterizedType(JsonApiObjectResponse::class.java, classReference)
+            val jsonAdapter: JsonAdapter<JsonApiObjectResponse<*>> =
+                moshi.adapter(parameterizedType)
             val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
-            return JsonApiMapper().map(input = jsonApiObject as JsonApiObjectResponse<*>, rawType = classReference.kotlin)
+            return JsonApiMapper().map(
+                input = jsonApiObject as JsonApiObjectResponse<*>,
+                rawType = classReference.kotlin
+            )
         }
 
-        fun getJsonApiResponseList(responseBody: ResponseBody?, classReference: Class<*>): List<*>? {
+        fun getJsonApiResponseList(
+            responseBody: ResponseBody?,
+            classReference: Class<*>
+        ): List<*>? {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             val jsonObject = JSONObject(responseBody?.string())
-            val listType = Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
+            val listType =
+                Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
             val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)
             val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
 

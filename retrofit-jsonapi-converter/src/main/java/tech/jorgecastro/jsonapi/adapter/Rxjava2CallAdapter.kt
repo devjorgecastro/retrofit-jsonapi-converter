@@ -16,7 +16,7 @@ import java.lang.reflect.Type
 class JsonApiRxJava2CallAdapter<R>(
     private val responseType: Type,
     private val rawType: Class<*>
-): CallAdapter<R, Any> {
+) : CallAdapter<R, Any> {
     override fun adapt(call: Call<R>): Any {
         return when(rawType) {
             Observable::class.java -> getObservable(call)
