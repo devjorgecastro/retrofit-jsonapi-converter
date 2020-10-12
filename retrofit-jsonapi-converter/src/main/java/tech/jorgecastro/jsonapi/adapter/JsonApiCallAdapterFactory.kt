@@ -23,7 +23,7 @@ class JsonApiCallAdapterFactory private constructor():
 
         val parameterizedType = getParameterUpperBound(0, returnType as ParameterizedType)
 
-        return when (val rawType =  getRawType(returnType)) {
+        return when (val rawType = getRawType(returnType)) {
             Single::class.java, Observable::class.java -> {
                 JsonApiRxJava2CallAdapter<Any>(parameterizedType, rawType)
             }

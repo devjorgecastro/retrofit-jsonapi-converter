@@ -21,28 +21,52 @@ class JsonApiMapper {
 
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-    fun map(input: JsonApiResponse, rawType: KClass<*>): Any? {
+    /**
+     * function map determines if the input to the function is an object or a list
+     *
+     * @param input is a JsonApi response.
+     * @param outputObjectRawType is the type of the object to which you want to convert the output.
+     * @return returns the desired object similar to working with Restful.
+     * @throws IllegalArgumentException when the argument passed  is not of type JsonApiResponse.
+     */
+    fun map(input: JsonApiResponse, outputObjectRawType: KClass<*>): Any? {
         return if (input is JsonApiObjectResponse<*>) {
-            mapToListObject(input, rawType)
+            mapToListObject(input, outputObjectRawType)
         } else {
             check(input is JsonApiListResponse<*>) {
                 throw IllegalArgumentException("The argument passed is not of type JsonApiResponse")
             }
-            mapToListObject(input, rawType)
+            mapToListObject(input, outputObjectRawType)
         }
     }
 
-    private fun mapToListObject(input: JsonApiObjectResponse<*>, rawType: KClass<*>): Any? {
-        val resourceId = getJsonApiIdFrom(rawType)
+    /**
+     * mapToListObject is overloaded function that map an object or a list
+     *
+     * @param input is of type [JsonApiObjectResponse] or JsonApiListResponse
+     * @param outputObjectRawType is the type of the object to which you want to convert the output.
+     * @return an object or list determined by [outputObjectRawType]
+     */
+    private fun mapToListObject(
+        input: JsonApiObjectResponse<*>,
+        outputObjectRawType: KClass<*>
+    ): Any? {
+        val resourceId = getJsonApiIdFrom(outputObjectRawType)
 
         /**
          * The attributes that have the JsonApiRelationship annotation are obtained.
          */
-        val jaRelationship = getRelationshipFromJsonApiData(rawType)
+        val jaRelationship = getRelationshipFromJsonApiData(outputObjectRawType)
 
         input.included?.let { listInclude ->
             input.data?.let { jsonApiData ->
-                mapDataPayload(jsonApiData, jaRelationship, rawType, listInclude, resourceId)
+                mapDataPayload(
+                    jsonApiData,
+                    jaRelationship,
+                    outputObjectRawType,
+                    listInclude,
+                    resourceId
+                )
             }
         } ?: run {
             input.data?.let { jsonApiData -> setDataId(jsonApiData, resourceId) }
@@ -51,20 +75,35 @@ class JsonApiMapper {
         return input.data?.attributes
     }
 
-
-    private fun mapToListObject(input: JsonApiListResponse<*>, rawType: KClass<*>): List<Any>? {
+    /**
+     * [mapToListObject] is overloaded function that map an object or a list
+     *
+     * @param input is of type [JsonApiListResponse] or JsonApiListResponse
+     * @param outputObjectRawType is the type of the object to which you want to convert the output.
+     * @return an object or list determined by [outputObjectRawType]
+     */
+    private fun mapToListObject(
+        input: JsonApiListResponse<*>,
+        outputObjectRawType: KClass<*>
+    ): List<Any>? {
 
         val listData = input.data
-        val resourceId = getJsonApiIdFrom(rawType)
+        val resourceId = getJsonApiIdFrom(outputObjectRawType)
 
         /**
          * The attributes that have the JsonApiRelationship annotation are obtained.
          */
-        val jaRelationship = getRelationshipFromJsonApiData(rawType)
+        val jaRelationship = getRelationshipFromJsonApiData(outputObjectRawType)
 
         input.included?.let { listInclude ->
             listData?.forEach loopListData@{ jsonApiData ->
-                mapDataPayload(jsonApiData, jaRelationship, rawType, listInclude, resourceId)
+                mapDataPayload(
+                    jsonApiData,
+                    jaRelationship,
+                    outputObjectRawType,
+                    listInclude,
+                    resourceId
+                )
             }
         } ?: run {
             listData?.forEach loopListData@{ jsonApiData -> setDataId(jsonApiData, resourceId) }

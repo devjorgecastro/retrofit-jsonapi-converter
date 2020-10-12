@@ -165,7 +165,7 @@ class JsonApiConverterFactory : Converter.Factory() {
             val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
             return JsonApiMapper().map(
                 input = jsonApiObject as JsonApiObjectResponse<*>,
-                rawType = classReference.kotlin
+                outputObjectRawType = classReference.kotlin
             )
         }
 
@@ -183,7 +183,7 @@ class JsonApiConverterFactory : Converter.Factory() {
             return JsonApiMapper()
                 .map(
                     input = jsonApiObject as JsonApiListResponse<*>,
-                    rawType = classReference.kotlin
+                    outputObjectRawType = classReference.kotlin
                 ) as List<*>?
         }
     }
