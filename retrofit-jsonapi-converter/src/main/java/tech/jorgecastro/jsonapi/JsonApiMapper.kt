@@ -343,6 +343,14 @@ class JsonApiMapper {
         }
     }
 
+    /**
+     * The attributes that have the [JsonApiRelationship] annotation are obtained.
+     *
+     * @param input is the expected object in data payload of JsonApi response.
+     * @return returns a list of fields filtered by the [JsonApiRelationship] annotation.
+     *
+     * @see JsonApiRelationshipAttribute
+     */
     private fun getRelationshipFromJsonApiData(input: KClass<*>): List<JsonApiRelationshipAttribute> {
 
         val jaRelationship = arrayListOf<JsonApiRelationshipAttribute>()
@@ -352,19 +360,17 @@ class JsonApiMapper {
             val annotations = field.annotations
             annotations.forEach { annotation ->
                 if (annotation is JsonApiRelationship) {
-                    jaRelationship.add(
-                        JsonApiRelationshipAttribute(
-                            field = field,
-                            jsonApiRelationshipAnnotation = annotation
-                        )
+
+                    val jaRelationshipAttr = JsonApiRelationshipAttribute(
+                        field = field,
+                        jsonApiRelationshipAnnotation = annotation
                     )
+                    jaRelationship.add(jaRelationshipAttr)
                 }
             }
         }
-
         return jaRelationship
     }
-
 
     /**
      * Get the object conformed by the kClassRelationship class passed by the parameter
@@ -454,6 +460,14 @@ class JsonApiMapper {
         return kClassResponse
     }
 
+    /**
+     * Get json api id from the expected object
+     *
+     * @param classRef is the expected object
+     * @return [JsonApiId] object
+     *
+     * @see JsonApiId
+     */
     private fun getJsonApiIdFrom(classRef: KClass<*>): JsonApiId {
         var jsonPropertyName: String? = null
         var propertyName = ""
