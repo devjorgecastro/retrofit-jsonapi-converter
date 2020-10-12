@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 
+apply from: '../ktlint.gradle'
+
 ext {
     bintrayRepo = 'RetrofitJsonApiConverter' //The repository name in Bintray dashboard
     bintrayName = 'tech.jorgecastro.retrofit-jsonapi-converter' // The package name of the Bintray repository
@@ -50,6 +52,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
