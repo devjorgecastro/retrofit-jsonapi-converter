@@ -41,11 +41,11 @@ class JsonApiMapper {
     }
 
     /**
-     * mapToListObject is overloaded function that map an object or a list
+     * mapToListObject is overloaded function that map an object or a list.
      *
-     * @param input is of type [JsonApiObjectResponse] or JsonApiListResponse
+     * @param input is of type [JsonApiObjectResponse] or JsonApiListResponse.
      * @param outputObjectRawType is the type of the object to which you want to convert the output.
-     * @return an object or list determined by [outputObjectRawType]
+     * @return an object or list determined by [outputObjectRawType].
      */
     private fun mapToListObject(
         input: JsonApiObjectResponse<*>,
@@ -116,10 +116,19 @@ class JsonApiMapper {
         }
     }
 
+    /**
+     * Map data payload
+     *
+     * @param jsonApiData is the data payload in JsonApi response.
+     * @param jaRelationship The attributes that have the [JsonApiRelationship] annotation are obtained.
+     * @param outputObjectRawType is the type of the object to which you want to convert the output.
+     * @param listInclude have list of payload included.
+     * @param resourceId containt info about the id of data.
+     */
     private fun mapDataPayload(
         jsonApiData: JsonApiData<out Any?>,
         jaRelationship: List<JsonApiRelationshipAttribute>,
-        rawType: KClass<*>,
+        outputObjectRawType: KClass<*>,
         listInclude: List<Any>,
         resourceId: JsonApiId
     ) {
@@ -159,7 +168,7 @@ class JsonApiMapper {
                         }
 
                         if (relationshipCoincidences.isNotEmpty()) {
-                            val kClassRelationship = getRawTypeRelationship(rawType, type)
+                            val kClassRelationship = getRawTypeRelationship(outputObjectRawType, type)
 
                             val includeRelationship = getObjectForIncludePayload(
                                 relationshipMap["id"].toString(),
