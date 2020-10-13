@@ -222,7 +222,9 @@ dataApi.getDataWithObservableError()
     })
 ```
 
-#### :warning:Limitations
+**JsonApiResponseException** is thrown when the JsonApi response is a set of system-managed errors. The error payload can be accessed by calling through the **data** attribute
+
+### :warning:Limitations
 * Retrofit JsonApi Converter does not support mixed data in the current version.
 
 # Author
