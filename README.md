@@ -222,6 +222,9 @@ dataApi.getDataWithObservableError()
     })
 ```
 
+#### :warning:Limitations
+* Retrofit JsonApi Converter does not support mixed data in the current version.
+
 # Author
 Jorge Castro - [@devjorgecastro on GitHub](https://github.com/devjorgecastro), [@devjcastro on Twitter](https://twitter.com/devjcastro)
 
