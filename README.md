@@ -222,6 +222,9 @@ dataApi.getDataWithObservableError()
     })
 ```
 
+#### :warning:Limitations
+* <span style='color:#e68a00;'>Retrofit JsonApi Converter does not support mixed data in the current version.</span>
+
 # Author
 Jorge Castro - [@devjorgecastro on GitHub](https://github.com/devjorgecastro), [@devjcastro on Twitter](https://twitter.com/devjcastro)
 
