@@ -226,6 +226,7 @@ dataApi.getDataWithObservableError()
 
 ### :warning:Limitations
 * Retrofit JsonApi Converter does not support mixed data in the current version.
+* In the current version there is no support for the [links](https://jsonapi.org/format/#document-links) attribute in errors
 
 # Author
 Jorge Castro - [@devjorgecastro on GitHub](https://github.com/devjorgecastro), [@devjcastro on Twitter](https://twitter.com/devjcastro)
