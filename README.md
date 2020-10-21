@@ -84,6 +84,7 @@ repositories {
 }
 
 dependencies {
+  implementation "com.squareup.moshi:moshi:LAST_VERSION"
   implementation 'tech.jorgecastro:retrofit-jsonapi-converter:LAST_VERSION'
 }
 ```
