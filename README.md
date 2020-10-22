@@ -234,6 +234,8 @@ dataApi.getDataWithObservableError()
 # Author
 Jorge Castro - [@devjorgecastro on GitHub](https://github.com/devjorgecastro), [@devjcastro on Twitter](https://twitter.com/devjcastro)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/devjcastro)
+
 # Disclaimer
 This is not an official [Square product](https://square.github.io/).
 
