@@ -1,5 +1,7 @@
 # Retrofit JsonApi Converter: Android Library for Retrofit
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/devjcastro)
+
 [website](https://devjorgecastro.github.io/retrofit-jsonapi-converter/)
 
 [ ![Download](https://api.bintray.com/packages/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/images/download.svg?version=1.0.0-beta3) ](https://bintray.com/devjorgecastro/RetrofitJsonApiConverter/tech.jorgecastro.retrofit-jsonapi-converter/1.0.0-beta3/link)
