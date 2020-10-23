@@ -72,7 +72,7 @@ class CoroutineFlowTest {
     }
 
     @Test
-    fun `Flow item with multiple relationship with JsonApiMethod annotation success`() =
+    fun `Flow item with multiple relationship no JsonApiMethod annotation success`() =
         runBlocking {
 
             check(mockData != null) { assert(false) }
