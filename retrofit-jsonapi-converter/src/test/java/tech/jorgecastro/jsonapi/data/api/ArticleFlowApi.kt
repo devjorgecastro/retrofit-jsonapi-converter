@@ -7,6 +7,9 @@ import tech.jorgecastro.jsonapi.data.dto.Article
 
 interface ArticleFlowApi {
 
+    @GET("/test")
+    suspend fun getOneArticleWithMultipleRelationshipNoJsonApi(): Flow<Article>
+
     @JsonApiMethod
     @GET("/test")
     fun getOneArticleWithMultipleRelationship(): Flow<Article>

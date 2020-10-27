@@ -11,7 +11,7 @@ import retrofit2.Response
 import tech.jorgecastro.jsonapi.JsonApiError
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 
-class JsonApiRetrofitCallAdapter<T>(val call: Call<T>): Call<T> {
+class JsonApiRetrofitCallAdapter<T>(val call: Call<T>) : Call<T> {
     @Throws(Exception::class)
     override fun enqueue(callback: Callback<T>) {
         call.enqueue(object : Callback<T> {
@@ -26,12 +26,18 @@ class JsonApiRetrofitCallAdapter<T>(val call: Call<T>): Call<T> {
 
                 if (httpCode in 400..499) {
                     val jsonObject = JSONObject(response.errorBody()?.string())
-                    val jsonApiError = moshi.adapter(JsonApiError::class.java).fromJson(jsonObject.toString())
+                    val jsonApiError =
+                        moshi.adapter(JsonApiError::class.java).fromJson(jsonObject.toString())
                     jsonApiError?.let {
-                        callback.onFailure(call, JsonApiResponseException(message = response.message(), data = jsonApiError))
+                        callback.onFailure(
+                            call,
+                            JsonApiResponseException(
+                                message = response.message(),
+                                data = jsonApiError
+                            )
+                        )
                     }
-                }
-                else {
+                } else {
                     callback.onResponse(call, response)
                 }
             }

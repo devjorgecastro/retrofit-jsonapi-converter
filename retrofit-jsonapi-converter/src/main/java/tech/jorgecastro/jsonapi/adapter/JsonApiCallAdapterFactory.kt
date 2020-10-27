@@ -9,7 +9,7 @@ import tech.jorgecastro.jsonapi.JsonApiMethod
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class JsonApiCallAdapterFactory private constructor():
+class JsonApiCallAdapterFactory private constructor() :
     CallAdapter.Factory() {
 
     override fun get(
@@ -19,7 +19,7 @@ class JsonApiCallAdapterFactory private constructor():
     ): CallAdapter<*, *>? {
 
         annotations.filterIsInstance<JsonApiMethod>().firstOrNull() ?: return null
-        require(returnType is ParameterizedType) { return null}
+        require(returnType is ParameterizedType) { return null }
 
         val parameterizedType = getParameterUpperBound(0, returnType as ParameterizedType)
 
