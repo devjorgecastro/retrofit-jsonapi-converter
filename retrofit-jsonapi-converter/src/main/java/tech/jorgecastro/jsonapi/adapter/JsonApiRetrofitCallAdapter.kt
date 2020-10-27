@@ -11,7 +11,7 @@ import retrofit2.Response
 import tech.jorgecastro.jsonapi.JsonApiError
 import tech.jorgecastro.jsonapi.exception.JsonApiResponseException
 
-class JsonApiRetrofitCallAdapter<T>(val call: Call<T>) : Call<T> {
+class JsonApiRetrofitCallAdapter<T>(private val call: Call<T>) : Call<T> {
     @Throws(Exception::class)
     override fun enqueue(callback: Callback<T>) {
         call.enqueue(object : Callback<T> {

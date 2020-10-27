@@ -33,6 +33,6 @@ fun Field.setListWithIgnorePrivateCase(obj: Any?, value: Any?) {
     isAccessible = false
 }
 
-fun<T: Any> T.getClass(): KClass<T> {
+fun <T : Any> T.getClass(): KClass<T> {
     return javaClass.kotlin
 }

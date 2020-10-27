@@ -18,17 +18,17 @@ class JsonApiRxJava2CallAdapter<R>(
     private val rawType: Class<*>
 ) : CallAdapter<R, Any> {
     override fun adapt(call: Call<R>): Any {
-        return when(rawType) {
+        return when (rawType) {
             Observable::class.java -> getObservable(call)
             else -> getSingleObservable(call)
         }
     }
 
-    override fun responseType() =  responseType
+    override fun responseType() = responseType
 
     private fun getObservable(call: Call<R>): Observable<*> {
         return Observable.create<Any> { emitter ->
-            call.enqueue(object: Callback<R> {
+            call.enqueue(object : Callback<R> {
                 override fun onFailure(call: Call<R>, t: Throwable) {
                     emitter.onError(t)
                 }
@@ -37,22 +37,28 @@ class JsonApiRxJava2CallAdapter<R>(
 
                     val httpCode = response.code()
 
-                    if (httpCode in 200..299) {
-                        emitter.onNext(response.body()!!)
-                        emitter.onComplete()
-                    }
-                    else if (httpCode in 400..499) {
-                        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-                        val jsonObject = JSONObject(response.errorBody()?.string())
-                        val jsonApiError = moshi.adapter(JsonApiError::class.java).fromJson(jsonObject.toString())
-                        jsonApiError?.let {
-                            emitter.onError(
-                                JsonApiResponseException(message = response.message(), data = jsonApiError)
-                            )
+                    when (httpCode) {
+                        in 200..299 -> {
+                            emitter.onNext(response.body()!!)
+                            emitter.onComplete()
                         }
-                    }
-                    else {
-                        emitter.onError(Exception())
+                        in 400..499 -> {
+                            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+                            val jsonObject = JSONObject(response.errorBody()?.string())
+                            val jsonApiError = moshi.adapter(JsonApiError::class.java)
+                                .fromJson(jsonObject.toString())
+                            jsonApiError?.let {
+                                emitter.onError(
+                                    JsonApiResponseException(
+                                        message = response.message(),
+                                        data = jsonApiError
+                                    )
+                                )
+                            }
+                        }
+                        else -> {
+                            emitter.onError(Exception())
+                        }
                     }
                 }
             })
@@ -61,7 +67,7 @@ class JsonApiRxJava2CallAdapter<R>(
 
     private fun getSingleObservable(call: Call<R>): Single<*> {
         return Single.create<Any> { emitter ->
-            call.enqueue(object: Callback<R> {
+            call.enqueue(object : Callback<R> {
                 override fun onFailure(call: Call<R>, t: Throwable) {
                     emitter.onError(t)
                 }

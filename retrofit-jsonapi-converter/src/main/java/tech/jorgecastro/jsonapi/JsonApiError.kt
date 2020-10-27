@@ -40,7 +40,7 @@ class JsonApiErrorInfo {
  * @see JsonApiSource
  * @see <a href="https://jsonapi.org/format/#errors" target="_blank">Json Api error specification</a>
  */
-@UpcomingChanges(description = "Support for links, source, meta attributes")
+@UpcomingChanges(description = "Support for links")
 class JsonApiErrorData {
     var id: String = ""
     var status: Int = 0

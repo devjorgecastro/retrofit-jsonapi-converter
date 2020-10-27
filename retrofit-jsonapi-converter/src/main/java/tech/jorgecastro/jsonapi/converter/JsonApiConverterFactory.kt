@@ -70,7 +70,7 @@ class JsonApiConverterFactory : Converter.Factory() {
          * When is Set of Elements
          */
         if (type is ParameterizedType) {
-            var parameterType = getParameterUpperBound(0, type)
+            val parameterType = getParameterUpperBound(0, type)
             val packageClass = (parameterType as Class<*>).name
             val aClass = Class.forName(packageClass)
             return JsonConverter.getInstance(aClass, getRawType(type))
@@ -86,7 +86,7 @@ class JsonApiConverterFactory : Converter.Factory() {
          * When is Set of Elements
          */
         if (type is ParameterizedType) {
-            var parameterType = getParameterUpperBound(0, type)
+            val parameterType = getParameterUpperBound(0, type)
 
             return FlowJsonConverter.getInstance(
                 Class.forName((parameterType as Class<*>).name),
@@ -98,8 +98,8 @@ class JsonApiConverterFactory : Converter.Factory() {
 
 
     internal class JsonConverter(
-        val classReference: Class<*>,
-        val classReferenceList: Class<*>? = null
+        private val classReference: Class<*>,
+        private val classReferenceList: Class<*>? = null
     ) : Converter<ResponseBody?, Any?> {
         @Throws(Exception::class)
         override fun convert(responseBody: ResponseBody?): Any? {

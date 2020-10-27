@@ -27,9 +27,8 @@ class JsonApiFlowCallAdapter<T>(private val responseType: Type) : CallAdapter<T,
                         }
 
                         override fun onResponse(call: Call<T>, response: Response<T>) {
-                            val httpCode = response.code()
 
-                            when (httpCode) {
+                            when (response.code()) {
                                 in 200..299 -> {
                                     try {
                                         continuation.resume(response.body()!!)
@@ -38,11 +37,16 @@ class JsonApiFlowCallAdapter<T>(private val responseType: Type) : CallAdapter<T,
                                     }
                                 }
                                 in 400..499 -> {
-                                    val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+                                    val moshi =
+                                        Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                                     val jsonObject = JSONObject(response.errorBody()?.string())
-                                    val jsonApiError = moshi.adapter(JsonApiError::class.java).fromJson(jsonObject.toString())
+                                    val jsonApiError = moshi.adapter(JsonApiError::class.java)
+                                        .fromJson(jsonObject.toString())
                                     jsonApiError?.let {
-                                        val jsonApiResponseException = JsonApiResponseException(message = response.message(), data = jsonApiError)
+                                        val jsonApiResponseException = JsonApiResponseException(
+                                            message = response.message(),
+                                            data = jsonApiError
+                                        )
                                         continuation.resumeWithException(jsonApiResponseException)
                                     }
                                 }
