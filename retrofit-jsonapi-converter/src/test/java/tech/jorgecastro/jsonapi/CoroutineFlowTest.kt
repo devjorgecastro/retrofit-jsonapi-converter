@@ -1,5 +1,7 @@
 package tech.jorgecastro.jsonapi
 
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -61,9 +63,35 @@ class CoroutineFlowTest {
         apiService.getOneArticleWithMultipleRelationship()
             .collect { article ->
                 assert(article.id.isNotEmpty())
+                assertNotNull(article.authors)
                 assert(article.authors!!.count() > 0)
+
+                val author = article.authors!!.first { it.id == "45" }
+                assertEquals(author.name, "Martin C. Robert")
             }
     }
+
+    @Test
+    fun `Flow item with multiple relationship no JsonApiMethod annotation success`() =
+        runBlocking {
+
+            check(mockData != null) { assert(false) }
+
+            val response = MockResponse()
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(mockData!!.ARTICLE_DATA_ITEM_WITH_MULTIPLE_RELATIONSHIP)
+            mockWebServer.enqueue(response)
+
+            apiService.getOneArticleWithMultipleRelationshipNoJsonApi()
+                .collect { article ->
+                    assert(article.id.isNotEmpty())
+                    assertNotNull(article.authors)
+                    assert(article.authors!!.count() > 0)
+
+                    val author = article.authors!!.first { it.id == "45" }
+                    assertEquals(author.name, "Martin C. Robert")
+                }
+        }
 
     @Test
     fun `suspend function with list objects success`() = runBlocking {
