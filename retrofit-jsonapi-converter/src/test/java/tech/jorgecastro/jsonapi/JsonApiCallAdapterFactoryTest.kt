@@ -45,7 +45,7 @@ class JsonApiCallAdapterFactoryTest {
 
         //Then
         assertNull(response)
-        verify(exactly = 0) { returnType.actualTypeArguments }
+        verify { returnType wasNot called }
     }
 
     @Test
@@ -101,8 +101,10 @@ class JsonApiCallAdapterFactoryTest {
 
         //Then
         assert(response is JsonApiRxJava2CallAdapter)
-        verify { returnType.actualTypeArguments }
-        verify { returnType.rawType }
+        verifyOrder {
+            returnType.actualTypeArguments
+            returnType.rawType
+        }
     }
 
     @Test
@@ -131,8 +133,10 @@ class JsonApiCallAdapterFactoryTest {
 
         //Then
         assert(response is JsonApiRxJava2CallAdapter)
-        verify { returnType.actualTypeArguments }
-        verify { returnType.rawType }
+        verifyOrder {
+            returnType.actualTypeArguments
+            returnType.rawType
+        }
     }
 
     @Test
@@ -161,8 +165,10 @@ class JsonApiCallAdapterFactoryTest {
 
         //Then
         assert(response is JsonApiFlowCallAdapter)
-        verify { returnType.actualTypeArguments }
-        verify { returnType.rawType }
+        verifyOrder {
+            returnType.actualTypeArguments
+            returnType.rawType
+        }
     }
 
     private fun getReturnTypeFromRxObservable(): Type? {
