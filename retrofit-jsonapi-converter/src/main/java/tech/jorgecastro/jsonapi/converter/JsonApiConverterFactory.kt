@@ -11,10 +11,10 @@ import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Converter
 import retrofit2.Retrofit
-import tech.jorgecastro.jsonapi.JsonApiResource
 import tech.jorgecastro.jsonapi.JsonApiListResponse
 import tech.jorgecastro.jsonapi.JsonApiMapper
 import tech.jorgecastro.jsonapi.JsonApiObjectResponse
+import tech.jorgecastro.jsonapi.JsonApiResource
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -96,7 +96,6 @@ class JsonApiConverterFactory : Converter.Factory() {
         return FlowJsonConverter.getInstance(Class.forName((type as Class<*>).name))
     }
 
-
     internal class JsonConverter(
         private val classReference: Class<*>,
         private val classReferenceList: Class<*>? = null
@@ -153,11 +152,10 @@ class JsonApiConverterFactory : Converter.Factory() {
         }
     }
 
-
     companion object {
         fun getJsonApiResponseObject(responseBody: ResponseBody?, classReference: Class<*>): Any? {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-            val jsonObject = JSONObject(responseBody?.string())
+            val jsonObject = JSONObject(responseBody?.string() ?: "")
             val parameterizedType =
                 Types.newParameterizedType(JsonApiObjectResponse::class.java, classReference)
             val jsonAdapter: JsonAdapter<JsonApiObjectResponse<*>> =
@@ -174,7 +172,7 @@ class JsonApiConverterFactory : Converter.Factory() {
             classReference: Class<*>
         ): List<*>? {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-            val jsonObject = JSONObject(responseBody?.string())
+            val jsonObject = JSONObject(responseBody?.string() ?: "")
             val listType =
                 Types.newParameterizedType(JsonApiListResponse::class.java, classReference)
             val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)

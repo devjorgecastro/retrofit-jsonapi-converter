@@ -25,7 +25,7 @@ class JsonApiRetrofitCallAdapter<T>(private val call: Call<T>) : Call<T> {
                 val httpCode = response.code()
 
                 if (httpCode in 400..499) {
-                    val jsonObject = JSONObject(response.errorBody()?.string())
+                    val jsonObject = JSONObject(response.errorBody()?.string() ?: "")
                     val jsonApiError =
                         moshi.adapter(JsonApiError::class.java).fromJson(jsonObject.toString())
                     jsonApiError?.let {
@@ -41,7 +41,6 @@ class JsonApiRetrofitCallAdapter<T>(private val call: Call<T>) : Call<T> {
                     callback.onResponse(call, response)
                 }
             }
-
         })
     }
 

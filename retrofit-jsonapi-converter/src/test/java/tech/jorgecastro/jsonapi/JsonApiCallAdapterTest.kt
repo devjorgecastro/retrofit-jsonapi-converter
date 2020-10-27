@@ -30,7 +30,7 @@ class JsonApiCallAdapterTest {
     @Test
     fun `call adapt method success`() {
         val responseType = jsonApiCallAdapter.adapt(retrofitCallMock)
-        assert(responseType is JsonApiRetrofitCallAdapter<*>)
+        assert(responseType is JsonApiRetrofitCallAdapter<Any>)
     }
 
     @Test

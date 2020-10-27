@@ -9,7 +9,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.doNothing
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Call
 import retrofit2.Response
@@ -58,7 +62,7 @@ class JsonApiRetrofitCallAdapterTest {
      * clone method
      */
     @Test
-    fun `clone`() {
+    fun `test clone method`() {
         `when`(call.clone()).thenReturn(callReturnMock)
 
         val response = jsonApiRetrofitCallAdapter.clone()

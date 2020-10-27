@@ -1,7 +1,12 @@
 package tech.jorgecastro.jsonapi
 
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.called
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.verify
+import io.mockk.verifyOrder
 import io.reactivex.Observable
 import io.reactivex.Single
 import junit.framework.TestCase.assertNull
@@ -31,7 +36,7 @@ class JsonApiCallAdapterFactoryTest {
     @Test
     fun `test when JsonApiCallAdapterFactory array annotation is empty`() {
 
-        //Given
+        // Given
         val returnType = mockk<ParameterizedType>()
         val annotations = emptyArray<Annotation>()
 
@@ -39,19 +44,17 @@ class JsonApiCallAdapterFactoryTest {
 
         every { returnType.actualTypeArguments } returns arrayOf()
 
-
-        //When
+        // When
         val response = jsonApiCallAdapterFactory.get(returnType, annotations, retrofit)
 
-
-        //Then
+        // Then
         assertNull(response)
         verify { returnType wasNot called }
     }
 
     @Test
     fun `test JsonApiCallAdapterFactory when ParametizedType return null`() {
-        //Given
+        // Given
 
         /**
          * you could also call the [getReturnTypeFromRxObservable] function to get a returnType
@@ -66,23 +69,20 @@ class JsonApiCallAdapterFactoryTest {
 
         val jsonApiCallAdapterFactory = JsonApiCallAdapterFactory.create()
 
-
-        //When
+        // When
         val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
 
-
-        //Then
+        // Then
         assertNull(response)
     }
 
     @Test
     fun `test JsonApiCallAdapterFactory when returnType is JsonApiRxJava2CallAdapter by Single`() {
-        //Given
+        // Given
         /**
          * you could also call the [getReturnTypeFromRxObservable] function to get a returnType
          */
         val returnType = mockk<ParameterizedType>()
-
 
         val jsonApiMethod = object : TestSingleApi {
             @JsonApiMethod
@@ -95,12 +95,10 @@ class JsonApiCallAdapterFactoryTest {
         every { returnType.actualTypeArguments } returns arrayOf(Single::class.java.genericSuperclass)
         every { returnType.rawType } returns Single::class.java
 
+        // When
+        val response = jsonApiCallAdapterFactory.get(returnType, annotations, retrofit)
 
-        //When
-        val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
-
-
-        //Then
+        // Then
         assert(response is JsonApiRxJava2CallAdapter)
         verifyOrder {
             returnType.actualTypeArguments
@@ -110,12 +108,11 @@ class JsonApiCallAdapterFactoryTest {
 
     @Test
     fun `test JsonApiCallAdapterFactory when returnType is JsonApiRxJava2CallAdapter by Observable`() {
-        //Given
+        // Given
         /**
          * you could also call the [getReturnTypeFromRxObservable] function to get a returnType
          */
         val returnType = mockk<ParameterizedType>()
-
 
         val jsonApiMethod = object : TestObservableApi {
             @JsonApiMethod
@@ -127,12 +124,10 @@ class JsonApiCallAdapterFactoryTest {
         every { returnType.actualTypeArguments } returns arrayOf(Single::class.java.genericSuperclass)
         every { returnType.rawType } returns Observable::class.java
 
+        // When
+        val response = jsonApiCallAdapterFactory.get(returnType, annotations, retrofit)
 
-        //When
-        val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
-
-
-        //Then
+        // Then
         assert(response is JsonApiRxJava2CallAdapter)
         verifyOrder {
             returnType.actualTypeArguments
@@ -142,12 +137,11 @@ class JsonApiCallAdapterFactoryTest {
 
     @Test
     fun `test JsonApiCallAdapterFactory when returnType is JsonApiFlowCallAdapter`() {
-        //Given
+        // Given
         /**
          * you could also call the [getReturnTypeFromFlow] function to get a returnType
          */
         val returnType = mockk<ParameterizedType>()
-
 
         val jsonApiMethod = object : TestFlowApi {
             @JsonApiMethod
@@ -159,12 +153,10 @@ class JsonApiCallAdapterFactoryTest {
         every { returnType.actualTypeArguments } returns arrayOf(Single::class.java.genericSuperclass)
         every { returnType.rawType } returns Flow::class.java
 
+        // When
+        val response = jsonApiCallAdapterFactory.get(returnType, annotations, retrofit)
 
-        //When
-        val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
-
-
-        //Then
+        // Then
         assert(response is JsonApiFlowCallAdapter)
         verifyOrder {
             returnType.actualTypeArguments
@@ -174,12 +166,11 @@ class JsonApiCallAdapterFactoryTest {
 
     @Test
     fun `test JsonApiCallAdapterFactory when returnType is JsonApiCallAdapter`() {
-        //Given
+        // Given
         /**
          * you could also call the [getReturnTypeFromFlow] function to get a returnType
          */
         val returnType = mockk<ParameterizedType>()
-
 
         val jsonApiMethod = object : TestFlowApi {
             @JsonApiMethod
@@ -191,12 +182,10 @@ class JsonApiCallAdapterFactoryTest {
         every { returnType.actualTypeArguments } returns arrayOf(String::class.java.genericSuperclass)
         every { returnType.rawType } returns List::class.java
 
+        // When
+        val response = jsonApiCallAdapterFactory.get(returnType, annotations, retrofit)
 
-        //When
-        val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
-
-
-        //Then
+        // Then
         assert(response is JsonApiCallAdapter)
         verifyOrder {
             returnType.actualTypeArguments

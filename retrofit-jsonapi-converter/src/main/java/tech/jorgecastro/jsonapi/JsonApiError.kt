@@ -55,7 +55,7 @@ class JsonApiErrorData {
  * An object containing references to the source of the error,
  * optionally including any of the following members: [pointer] and [parameter]
  *
- * @property pointer a JSON Pointer [RFC6901] to the associated entity in the request document
+ * @property pointer a JSON Pointer `[RFC6901]` to the associated entity in the request document
  * [e.g. "/data" for a primary data object, or "/data/attributes/title" for a specific attribute].
  * @property parameter a string indicating which URI query parameter caused the error.
  *

@@ -4,8 +4,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.json.JSONObject
-import tech.jorgecastro.jsonapi.commons.setListWithIgnorePrivateCase
 import tech.jorgecastro.jsonapi.commons.jDeclaredFields
+import tech.jorgecastro.jsonapi.commons.setListWithIgnorePrivateCase
 import tech.jorgecastro.jsonapi.commons.setWithIgnorePrivateCase
 import java.lang.IllegalArgumentException
 import java.lang.reflect.ParameterizedType
@@ -182,10 +182,8 @@ class JsonApiMapper {
                         }
                     }
 
-
                     updateRelationshipInAttrClass(jsonApiData, listIncludeObjectsMaps, type)
                 }
-
             }
         }
 
@@ -216,7 +214,6 @@ class JsonApiMapper {
                 newList
             }
 
-
         return if (response.count() == 1) {
             response.first()
         } else {
@@ -241,21 +238,21 @@ class JsonApiMapper {
 
             expectedObject.javaClass.declaredFields.forEach { field ->
 
-                //Iterate all annotations for each attribute of the class
+                // Iterate all annotations for each attribute of the class
                 field.annotations.forEach { annotation ->
-                    if (annotation is JsonApiRelationship
-                        && annotation.jsonApiResourceName == typeValue
+                    if (annotation is JsonApiRelationship &&
+                        annotation.jsonApiResourceName == typeValue
                     ) {
 
-                        //Value for the relation
+                        // Value for the relation
                         val valueField = getValueForRelationship(
                             listIncludeObjectsMaps,
                             annotation,
                             typeValue
                         )
 
-                        if (field.type == List::class.java
-                            && valueField !is ArrayList<*>
+                        if (field.type == List::class.java &&
+                            valueField !is ArrayList<*>
                         ) {
                             field.setListWithIgnorePrivateCase(expectedObject, valueField)
                         } else {
@@ -264,7 +261,6 @@ class JsonApiMapper {
                         return@jsonApiDataLoop
                     }
                 }
-
             }
         }
     }
@@ -301,7 +297,6 @@ class JsonApiMapper {
             }
         }
     }
-
 
     /**
      * Sets the id for all Objects of class that represent attributes payload
@@ -403,7 +398,6 @@ class JsonApiMapper {
                     relationshipObject =
                         moshi.adapter(kClassRelationship.java).fromJson(jsonObjetString)
 
-
                     relationshipObject?.jDeclaredFields()?.firstOrNull { it.name == "id" }?.run {
                         val valueForId = include[kClassRelationshipId.jsonPropertyName]
                         setWithIgnorePrivateCase(relationshipObject, "$valueForId")
@@ -434,7 +428,7 @@ class JsonApiMapper {
         run loop@{
             mainRawType.java.declaredFields.forEach { field ->
 
-                //All annotations of type JsonApiRelationship are obtained
+                // All annotations of type JsonApiRelationship are obtained
                 val jsonApiRelationshipFiltered =
                     field.annotations.filterIsInstance<JsonApiRelationship>()
                 jsonApiRelationshipFiltered.forEach { jsonapiRelationship ->

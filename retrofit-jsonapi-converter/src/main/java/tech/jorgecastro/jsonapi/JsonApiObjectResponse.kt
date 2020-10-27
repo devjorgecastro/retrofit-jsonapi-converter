@@ -16,7 +16,6 @@ class JsonApiData<T> {
     var relationships: Map<String, *>? = null
 }
 
-
 open class JsonApiResponse(var included: List<Any>? = null)
 
 class JsonApiObjectResponse<T> : JsonApiResponse() {

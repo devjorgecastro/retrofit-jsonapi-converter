@@ -55,7 +55,6 @@ class ArticleMockData {
     }
     """.trimIndent()
 
-
     val ARTICLE_DATA_LIST = """
         {
           "data": [
