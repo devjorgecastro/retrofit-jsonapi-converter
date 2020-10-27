@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
+import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapter
 import tech.jorgecastro.jsonapi.adapter.JsonApiCallAdapterFactory
 import tech.jorgecastro.jsonapi.adapter.JsonApiFlowCallAdapter
 import tech.jorgecastro.jsonapi.adapter.JsonApiRxJava2CallAdapter
@@ -165,6 +166,38 @@ class JsonApiCallAdapterFactoryTest {
 
         //Then
         assert(response is JsonApiFlowCallAdapter)
+        verifyOrder {
+            returnType.actualTypeArguments
+            returnType.rawType
+        }
+    }
+
+    @Test
+    fun `test JsonApiCallAdapterFactory when returnType is JsonApiCallAdapter`() {
+        //Given
+        /**
+         * you could also call the [getReturnTypeFromFlow] function to get a returnType
+         */
+        val returnType = mockk<ParameterizedType>()
+
+
+        val jsonApiMethod = object : TestFlowApi {
+            @JsonApiMethod
+            override fun test() = flowOf(listOf(""))
+        }
+        val annotations = jsonApiMethod.javaClass.declaredMethods.first().annotations
+
+        val jsonApiCallAdapterFactory = JsonApiCallAdapterFactory.create()
+        every { returnType.actualTypeArguments } returns arrayOf(String::class.java.genericSuperclass)
+        every { returnType.rawType } returns List::class.java
+
+
+        //When
+        val response = jsonApiCallAdapterFactory.get(returnType!!, annotations, retrofit)
+
+
+        //Then
+        assert(response is JsonApiCallAdapter)
         verifyOrder {
             returnType.actualTypeArguments
             returnType.rawType
