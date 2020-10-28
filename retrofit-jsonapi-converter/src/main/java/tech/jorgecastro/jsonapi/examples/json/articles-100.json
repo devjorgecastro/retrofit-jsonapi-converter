@@ -1,0 +1,3639 @@
+{
+  "data": [
+    {
+      "type": "articles",
+      "id": "1",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed! - ID=1",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "2",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "3",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "4",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "5",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "6",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "7",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "8",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "9",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "10",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "11",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "12",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "13",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "14",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "15",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "16",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "17",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "18",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "19",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "20",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "21",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "22",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "23",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "24",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "25",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "26",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "27",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "28",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "29",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "30",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "31",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "32",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "33",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "34",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "35",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "36",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "37",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "38",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "39",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "40",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "41",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "42",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "43",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "44",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "45",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "46",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "47",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "48",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "49",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "50",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed! - ID=50",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "51",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "52",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "53",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "54",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "55",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "56",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "57",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "58",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "59",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "60",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "61",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "62",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "63",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "64",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "65",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "66",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "67",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "68",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "69",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "70",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "71",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "72",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "73",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "74",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "75",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "76",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "77",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "78",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "79",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "80",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "81",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "82",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "83",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "84",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "85",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "86",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "87",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "88",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "89",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "90",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "91",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "92",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "93",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "94",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "95",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "96",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "97",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "98",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "99",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "43",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "articles",
+      "id": "100",
+      "attributes": {
+        "title": "JSON:API paints my bikeshed! - ID=100",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "author": {
+          "data": [
+            {
+              "id": "41",
+              "type": "people"
+            },
+            {
+              "id": "42",
+              "type": "people"
+            },
+            {
+              "id": "44",
+              "type": "people"
+            },
+            {
+              "id": "45",
+              "type": "people"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "type": "people",
+      "id": "41",
+      "attributes": {
+        "name": "John",
+        "age": 30,
+        "gender": "male"
+      }
+    },
+    {
+      "type": "people",
+      "id": "42",
+      "attributes": {
+        "name": "John",
+        "age": 40,
+        "gender": "male"
+      }
+    },
+    {
+      "type": "people",
+      "id": "43",
+      "attributes": {
+        "name": "Martin C. Robert",
+        "age": 50,
+        "gender": "male"
+      }
+    },
+    {
+      "type": "people",
+      "id": "44",
+      "attributes": {
+        "name": "John",
+        "age": 60,
+        "gender": "male"
+      }
+    },
+    {
+      "type": "people",
+      "id": "45",
+      "attributes": {
+        "name": "John",
+        "age": 70,
+        "gender": "male"
+      }
+    }
+  ]
+}

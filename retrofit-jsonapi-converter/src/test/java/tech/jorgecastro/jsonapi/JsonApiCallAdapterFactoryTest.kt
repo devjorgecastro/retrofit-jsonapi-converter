@@ -35,7 +35,6 @@ class JsonApiCallAdapterFactoryTest {
 
     @Test
     fun `test when JsonApiCallAdapterFactory array annotation is empty`() {
-
         // Given
         val returnType = mockk<ParameterizedType>()
         val annotations = emptyArray<Annotation>()
