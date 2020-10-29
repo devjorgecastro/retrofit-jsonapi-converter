@@ -5,6 +5,7 @@ import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import tech.jorgecastro.jsonapi.JsonApiMethod
+import tech.jorgecastro.jsonapi.data.dto.ZoneCoverage
 
 interface TestSingleApi {
     @JsonApiMethod

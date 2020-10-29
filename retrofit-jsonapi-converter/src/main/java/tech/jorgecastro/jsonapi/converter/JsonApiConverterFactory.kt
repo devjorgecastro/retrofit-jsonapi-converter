@@ -15,6 +15,8 @@ import tech.jorgecastro.jsonapi.JsonApiListResponse
 import tech.jorgecastro.jsonapi.JsonApiMapper
 import tech.jorgecastro.jsonapi.JsonApiObjectResponse
 import tech.jorgecastro.jsonapi.JsonApiResource
+import tech.jorgecastro.jsonapi.strategy.MapperListStrategy
+import tech.jorgecastro.jsonapi.strategy.MapperObjectStrategy
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -161,9 +163,11 @@ class JsonApiConverterFactory : Converter.Factory() {
             val jsonAdapter: JsonAdapter<JsonApiObjectResponse<*>> =
                 moshi.adapter(parameterizedType)
             val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
+
             return JsonApiMapper().map(
                 input = jsonApiObject as JsonApiObjectResponse<*>,
-                outputObjectRawType = classReference.kotlin
+                outputObjectRawType = classReference.kotlin,
+                strategy = MapperObjectStrategy()
             )
         }
 
@@ -178,11 +182,11 @@ class JsonApiConverterFactory : Converter.Factory() {
             val jsonAdapter: JsonAdapter<JsonApiListResponse<*>> = moshi.adapter(listType)
             val jsonApiObject = jsonAdapter.fromJson(jsonObject.toString())
 
-            return JsonApiMapper()
-                .map(
-                    input = jsonApiObject as JsonApiListResponse<*>,
-                    outputObjectRawType = classReference.kotlin
-                ) as List<*>?
+            return JsonApiMapper().map(
+                input = jsonApiObject as JsonApiListResponse<*>,
+                outputObjectRawType = classReference.kotlin,
+                strategy = MapperListStrategy()
+            ) as List<*>?
         }
     }
 }

@@ -7,6 +7,7 @@ import org.json.JSONObject
 import tech.jorgecastro.jsonapi.commons.jDeclaredFields
 import tech.jorgecastro.jsonapi.commons.setListWithIgnorePrivateCase
 import tech.jorgecastro.jsonapi.commons.setWithIgnorePrivateCase
+import tech.jorgecastro.jsonapi.strategy.JsonApiMapperStrategy
 import java.lang.IllegalArgumentException
 import java.lang.reflect.ParameterizedType
 import kotlin.jvm.internal.Reflection
@@ -28,7 +29,26 @@ class JsonApiMapper {
      * @param outputObjectRawType is the type of the object to which you want to convert the output.
      * @return returns the desired object similar to working with Restful.
      * @throws IllegalArgumentException when the argument passed  is not of type JsonApiResponse.
+     *
+     * Example of usage for JsonApiObjectResponse
+     * ```
+     * return JsonApiMapper().map(
+     *      input = jsonApiObject as JsonApiObjectResponse<*>,
+     *      outputObjectRawType = classReference.kotlin
+     * )
+     * ```
+     *
+     * * Example of usage for JsonApiListResponse
+     * ```
+     * return JsonApiMapper().map(
+     *      input = jsonApiObject as JsonApiListResponse<*>,
+     *      outputObjectRawType = classReference.kotlin
+     * )
+     * ```
+     *
+     * @deprecated Please use map(JsonApiResponse, KClass<*>, JsonApiMapperStrategy) instead.
      */
+    @Deprecated(message = "Use map(JsonApiResponse, KClass<*>, JsonApiMapperStrategy) instead.")
     fun map(input: JsonApiResponse, outputObjectRawType: KClass<*>): Any? {
         return if (input is JsonApiObjectResponse<*>) {
             mapToListObject(input, outputObjectRawType)
@@ -38,6 +58,45 @@ class JsonApiMapper {
             }
             mapToListObject(input, outputObjectRawType)
         }
+    }
+
+    /**
+     * function map determines if the input to the function is an object or a list
+     *
+     * @param input is a JsonApi response.
+     * @param outputObjectRawType is the type of the object to which you want to convert the output.
+     * @param strategy is the strategy to covert to object or list
+     * @return returns the desired object similar to working with Restful.
+     * @throws IllegalArgumentException when the argument passed  is not of type JsonApiResponse.
+     * @since 1.0.0-beta4
+     *
+     * Example of usage for JsonApiListResponse
+     * ```
+     * return JsonApiMapper().map(
+     *      input = jsonApiObject as JsonApiObjectResponse<*>,
+     *      outputObjectRawType = classReference.kotlin,
+     *      strategy = MapperObjectStrategy()
+     * )
+     * ```
+     *
+     * * Example of usage for JsonApiListResponse
+     * ```
+     * return JsonApiMapper().map(
+     *      input = jsonApiObject as JsonApiListResponse<*>,
+     *      outputObjectRawType = classReference.kotlin,
+     *      strategy = MapperListStrategy()
+     * )
+     * ```
+     */
+    fun map(
+        input: JsonApiResponse,
+        outputObjectRawType: KClass<*>,
+        strategy: JsonApiMapperStrategy
+    ): Any? {
+        check((input is JsonApiListResponse<*>) || (input is JsonApiObjectResponse<*>)) {
+            throw IllegalArgumentException("The argument passed is not of type JsonApiResponse")
+        }
+        return strategy.map(input, outputObjectRawType, this)
     }
 
     /**
@@ -125,7 +184,7 @@ class JsonApiMapper {
      * @param listInclude have list of payload included.
      * @param resourceId containt info about the id of data.
      */
-    private fun mapDataPayload(
+    fun mapDataPayload(
         jsonApiData: JsonApiData<out Any?>,
         jaRelationship: List<JsonApiRelationshipAttribute>,
         outputObjectRawType: KClass<*>,
@@ -275,7 +334,7 @@ class JsonApiMapper {
      * @see JsonApiData
      * @see JsonApiId
      */
-    private fun setDataId(
+    fun setDataId(
         jsonApiData: JsonApiData<out Any?>,
         resourceId: JsonApiId
     ) {
@@ -346,7 +405,7 @@ class JsonApiMapper {
      *
      * @see JsonApiRelationshipAttribute
      */
-    private fun getRelationshipFromJsonApiData(input: KClass<*>): List<JsonApiRelationshipAttribute> {
+    fun getRelationshipFromJsonApiData(input: KClass<*>): List<JsonApiRelationshipAttribute> {
 
         val jaRelationship = arrayListOf<JsonApiRelationshipAttribute>()
 
@@ -462,7 +521,7 @@ class JsonApiMapper {
      *
      * @see JsonApiId
      */
-    private fun getJsonApiIdFrom(classRef: KClass<*>): JsonApiId {
+    fun getJsonApiIdFrom(classRef: KClass<*>): JsonApiId {
         var jsonPropertyName: String? = null
         var propertyName = ""
         var fieldName: String? = null

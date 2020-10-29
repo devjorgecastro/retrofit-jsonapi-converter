@@ -18,7 +18,7 @@ import tech.jorgecastro.jsonapi.converter.JsonApiConverterFactory
 import tech.jorgecastro.jsonapi.data.api.ArticleApi
 import java.net.HttpURLConnection
 
-class Article100FlowTest {
+class ArticleFlowTest {
 
     @get:Rule
     var coroutinesTestRule = CoroutineTestRule()
