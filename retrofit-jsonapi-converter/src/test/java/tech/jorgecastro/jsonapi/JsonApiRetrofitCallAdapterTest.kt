@@ -32,7 +32,7 @@ class JsonApiRetrofitCallAdapterTest {
 
     @Before
     fun setup() {
-        jsonApiRetrofitCallAdapter = JsonApiRetrofitCallAdapter<Any>(call)
+        jsonApiRetrofitCallAdapter = JsonApiRetrofitCallAdapter(call)
     }
 
     /**
