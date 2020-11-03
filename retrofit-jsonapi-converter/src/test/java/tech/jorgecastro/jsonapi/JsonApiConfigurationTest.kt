@@ -43,18 +43,15 @@ class JsonApiConfigurationTest {
             .build()
             .create(TestFlowApi::class.java)
 
-
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(ArticleMockData().ARTICLE_DATA_LIST)
 
         mockWebServer.enqueue(response)
 
-
         try {
             apiService.test()
                 .collect()
-
         } catch (e: Exception) {
             assertTrue(
                 e.message?.contains("Unable to create call adapter for kotlinx.coroutines.flow.Flow")
@@ -62,7 +59,6 @@ class JsonApiConfigurationTest {
             )
         }
     }
-
 
     @Test
     fun `test if JsonApiConverterFactory is configured`() = runBlocking {
@@ -74,23 +70,20 @@ class JsonApiConfigurationTest {
             .build()
             .create(TestFlowApi::class.java)
 
-
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(ArticleMockData().ARTICLE_DATA_LIST)
 
         mockWebServer.enqueue(response)
 
-
         try {
             apiService.test()
                 .collect()
-
         } catch (e: Exception) {
             assertEquals(
                 e.message,
                 "Unable to create converter for java.util.List<java.lang.String>\n" +
-                        "    for method TestFlowApi.test"
+                    "    for method TestFlowApi.test"
             )
         }
     }
