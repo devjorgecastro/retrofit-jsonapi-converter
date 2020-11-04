@@ -68,7 +68,6 @@ class ArticleFlowTest {
                     listOf("41", "42", "43", "44", "45")
                 )
 
-
                 val articleWithId50 = articles.first { it.id == "50" }
                 assertEquals(articleWithId50.title, "JSON:API paints my bikeshed! - ID=50")
                 assertEquals(articleWithId50.authors?.count(), 3)
@@ -78,13 +77,11 @@ class ArticleFlowTest {
                     "Martin C. Robert"
                 )
 
-
                 val lastArticle = articles.last()
                 assertEquals(lastArticle.title, "JSON:API paints my bikeshed! - ID=100")
                 assertEquals(lastArticle.authors?.count(), 4)
                 assertEquals(lastArticle.authors?.map { it.id }, listOf("41", "42", "44", "45"))
             }
-
     }
 
     @Test
@@ -108,7 +105,6 @@ class ArticleFlowTest {
                     listOf("41", "42", "43", "44", "45")
                 )
 
-
                 val articleWithId500 = articles.first { it.id == "500" }
                 assertEquals(articleWithId500.title, "JSON:API paints my bikeshed! - ID=500")
                 assertEquals(articleWithId500.authors?.count(), 3)
@@ -118,13 +114,11 @@ class ArticleFlowTest {
                     "Martin C. Robert"
                 )
 
-
                 val lastArticle = articles.last()
                 assertEquals(lastArticle.title, "JSON:API paints my bikeshed! - ID=5000")
                 assertEquals(lastArticle.authors?.count(), 4)
                 assertEquals(lastArticle.authors?.map { it.id }, listOf("41", "42", "44", "45"))
             }
-
     }
 
     @Test
@@ -148,7 +142,6 @@ class ArticleFlowTest {
                     listOf("41", "42", "43", "44", "45")
                 )
 
-
                 val articleWithId500 = articles.first { it.id == "5000" }
                 assertEquals(articleWithId500.title, "JSON:API paints my bikeshed! - ID=5000")
                 assertEquals(articleWithId500.authors?.count(), 3)
@@ -158,12 +151,10 @@ class ArticleFlowTest {
                     "Martin C. Robert"
                 )
 
-
                 val lastArticle = articles.last()
                 assertEquals(lastArticle.title, "JSON:API paints my bikeshed! - ID=10000")
                 assertEquals(lastArticle.authors?.count(), 4)
                 assertEquals(lastArticle.authors?.map { it.id }, listOf("41", "42", "44", "45"))
             }
-
     }
 }
