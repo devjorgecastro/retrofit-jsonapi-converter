@@ -1,36 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.github.dcendents.android-maven'
+
+apply plugin: 'maven-publish'
+apply from: '../publish.gradle'
 
 apply plugin: 'org.jetbrains.dokka'
 apply from: '../ktlint.gradle'
-
-ext {
-    bintrayRepo = 'RetrofitJsonApiConverter' //The repository name in Bintray dashboard
-    bintrayName = 'tech.jorgecastro.retrofit-jsonapi-converter' // The package name of the Bintray repository
-
-    libraryName = 'retrofit-jsonapi-converter' // The module name in the Android Studio project
-
-    //Artifact Information
-    // For example, tech.jorgecastro:retrofit-jsonapi-converter:1.0.0-alpha1
-    publishedGroupId = 'tech.jorgecastro'
-    artifact = 'retrofit-jsonapi-converter'
-    libraryVersion = '1.0.0-beta3'
-
-    libraryDescription = 'Library to convert responses from a jsonapi-formatted web service to class objects'
-
-    siteUrl = 'https://github.com/devjorgecastro/retrofit-jsonapi-converter'
-    gitUrl = 'https://github.com/devjorgecastro/retrofit-jsonapi-converter.git'
-
-    developerId = 'devjorgecastro'
-    developerName = 'Jorge Castro'
-    developerEmail = 'devjorgecastro@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
 
 android {
     compileSdkVersion 29
@@ -60,6 +36,10 @@ android {
     // For Kotlin projects
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        lintConfig file("lint-config.xml")
     }
 }
 
@@ -100,5 +80,4 @@ dependencies {
 
 //Add these lines to publish library to bintray
 //Place it at the end of the file
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/1.0.3/gradle-mavenizer.gradle'

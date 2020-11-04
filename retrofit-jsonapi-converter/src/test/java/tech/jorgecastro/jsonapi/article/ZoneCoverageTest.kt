@@ -31,7 +31,6 @@ class ZoneCoverageTest {
     @get:Rule
     var coroutinesTestRule = CoroutineTestRule()
 
-
     private val jsonNameList = "zonecoverage/zone-coverage-without-relationship"
     private val jsonNameObject = "zonecoverage/zonecoverage-single-no-relationship"
 
@@ -84,7 +83,6 @@ class ZoneCoverageTest {
                 assertEquals(lastZone.countryName, "Chile")
                 assertEquals(lastZone.cityName, "Santiago de Chile")
             }
-
     }
 
     @Test
@@ -103,7 +101,6 @@ class ZoneCoverageTest {
                 )
             }
             .collect()
-
     }
 
     @Test
@@ -120,7 +117,6 @@ class ZoneCoverageTest {
                 assertEquals(it.cityName, "Bogotá, D.C.")
             }
     }
-
 
     /**
      * RxJava Observable
@@ -182,7 +178,6 @@ class ZoneCoverageTest {
             .setBody(mockJson?.getMockJson(jsonNameList) ?: "")
         mockWebServer.enqueue(response)
 
-
         val observer = TestObserver<ZoneCoverage>()
         apiService.getSingleZoneCoverageWithObservable()
             .subscribe(observer)
@@ -192,7 +187,6 @@ class ZoneCoverageTest {
 
         observer.dispose()
     }
-
 
     /**
      * RxJava Single
@@ -253,7 +247,6 @@ class ZoneCoverageTest {
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(mockJson?.getMockJson(jsonNameList) ?: "")
         mockWebServer.enqueue(response)
-
 
         val observer = TestObserver<ZoneCoverage>()
         apiService.getSingleZoneCoverageWithSingle()
