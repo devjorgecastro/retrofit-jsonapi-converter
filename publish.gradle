@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
@@ -35,6 +37,14 @@ publishing {
 def properties = new Properties()
 properties.load(new FileInputStream("local.properties"))
 
+
+def getReleaseDate() {
+    def dateFormat = new SimpleDateFormat("MMM dd, yyyy", new Locale("us", "US"))
+    // GregorianCalendar(2020, 9, 20).getTime()
+    def releaseDate = new Date()
+    return dateFormat.format(releaseDate)
+}
+
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
@@ -53,6 +63,12 @@ bintray {
             desc = "Version ${this.version}"
             released = new Date()
             vcsTag = this.version
+            attributes = [
+                    'Release Date': getReleaseDate(),
+                    'Author': "Jorge Castro",
+                    'Twitter': "@devjcastro",
+                    'Github': "devjorgecastro"
+            ]
         }
     }
 }
